@@ -1,0 +1,11 @@
+<div *ngIf="profile">
+    <h2>Welcome, {{ profile.display_name }}</h2>
+    <p>Email: {{ profile.email }}</p>
+    <p>Country: {{ profile.country }}</p>
+    <img [src]="profile.images?.[0]?.url" alt="Profile Image" width="150" *ngIf="profile.images?.length">
+  </div>
+  
+  <div *ngIf="!profile">
+    <p>Loading profile...</p>
+  </div>
+  

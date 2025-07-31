@@ -35,6 +35,8 @@
               }
             ],
             "styles": [
+              "https://fonts.googleapis.com/css2?family=Nunito:wght@400;700&display=swap",
+              "node_modules/@fortawesome/fontawesome-free/css/all.min.css",
               "src/styles.css"
             ]
           },
@@ -98,5 +100,8 @@
         }
       }
     }
+  },
+  "cli": {
+    "analytics": false
   }
 }

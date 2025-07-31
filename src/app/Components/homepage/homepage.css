@@ -1,0 +1,215 @@
+ html,
+ body {
+   margin: 0;
+   padding: 0;
+   background-color: black;
+   height: 100%;
+   width: 100%;
+   font-family: 'Circular Std', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+   overflow-x: hidden;
+ }
+
+ .background-wrapper {
+   min-height: 100vh;
+   width: 100%;
+   position: relative;
+   background-color: black;
+   overflow: hidden;
+ }
+
+ .arctic-glow {
+   position: absolute;
+   inset: 0;
+   z-index: 0;
+   background: radial-gradient(ellipse 80% 60% at 50% 0%, rgba(34, 197, 94, 0.25), rgba(0, 0, 0, 1) 70%);
+ }
+
+ #Header {
+   position: relative;
+   z-index: 2;
+   display: flex;
+   justify-content: space-between;
+   align-items: center;
+   padding: 20px 40px;
+   width: calc(100% - 80px);
+   box-sizing: border-box;
+ }
+#SpotifyLogo {
+  background-image: url('../../assets/SpotifyTextLogo.png');
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+  width: 200px;
+  height: 60px;
+}
+
+
+
+ .social-links {
+   display: flex;
+   gap: 30px;
+   align-items: center;
+ }
+
+ .Socials {
+   color: #b3b3b3;
+   text-decoration: none;
+   font-size: 16px;
+   font-weight: 500;
+   padding: 8px 16px;
+   border-radius: 20px;
+   transition: all 0.2s ease;
+   cursor: pointer;
+ }
+
+ .Socials:hover {
+   color: #1db954;
+   background-color: rgba(29, 185, 84, 0.1);
+   transform: translateY(-2px);
+ }
+
+ #HeroText {
+   position: relative;
+   z-index: 2;
+   text-align: center;
+   margin-top: 15vh;
+   padding: 0 20px;
+
+   font-family: 'Nunito', sans-serif;
+
+
+ }
+
+ #HeroText h1 {
+   font-size: clamp(4rem, 12vw, 8rem);
+   font-weight: 900;
+   color: white;
+   margin: 0;
+   /* background: linear-gradient(135deg, #ffffff 0%, #1db954 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent; */
+   background-clip: text;
+   letter-spacing: -0.02em;
+   line-height: 1.1;
+   text-shadow: 0 0 30px rgba(29, 185, 84, 0.3);
+ }
+
+ .btn-container {
+   display: flex;
+   justify-content: center;
+   gap: 20px;
+   margin-top: 60px;
+   position: relative;
+   z-index: 2;
+   padding: 0 20px;
+ }
+
+ .nav-button {
+   background: linear-gradient(135deg, #1db954 0%, #1ed760 100%);
+   color: white;
+   border: none;
+   padding: 16px 32px;
+   border-radius: 50px;
+   font-size: 18px;
+   font-weight: 700;
+   cursor: pointer;
+   transition: all 0.3s ease;
+   box-shadow: 0 8px 25px rgba(29, 185, 84, 0.3);
+   text-transform: uppercase;
+   letter-spacing: 1px;
+   font-family: inherit;
+ }
+
+ .nav-button:hover {
+   background: linear-gradient(135deg, #1ed760 0%, #1fdf64 100%);
+   transform: translateY(-3px);
+   box-shadow: 0 12px 35px rgba(29, 185, 84, 0.4);
+ }
+
+ .nav-button:active {
+   transform: translateY(-1px);
+   box-shadow: 0 6px 20px rgba(29, 185, 84, 0.3);
+ }
+
+ /* Responsive Design */
+ @media (max-width: 768px) {
+   #Header {
+     padding: 15px 20px;
+     width: calc(100% - 40px);
+   }
+
+   #SpotifyLogo {
+     width: 120px;
+     height: 36px;
+   }
+
+   .social-links {
+     gap: 20px;
+   }
+
+   .Socials {
+     font-size: 14px;
+     padding: 6px 12px;
+   }
+
+   #HeroText {
+     margin-top: 10vh;
+   }
+
+   .btn-container {
+     margin-top: 40px;
+     flex-direction: column;
+     align-items: center;
+   }
+
+   .nav-button {
+     padding: 14px 28px;
+     font-size: 16px;
+     width: 200px;
+   }
+ }
+
+ @media (max-width: 480px) {
+   #Header {
+     flex-direction: column;
+     gap: 15px;
+     align-items: center;
+   }
+
+   .social-links {
+     gap: 15px;
+   }
+
+   #HeroText {
+     margin-top: 5vh;
+   }
+
+   .nav-button {
+     width: 180px;
+   }
+ }
+
+ /* Animation for page load */
+ @keyframes fadeInUp {
+   from {
+     opacity: 0;
+     transform: translateY(30px);
+   }
+
+   to {
+     opacity: 1;
+     transform: translateY(0);
+   }
+ }
+
+ #Header {
+   animation: fadeInUp 0.8s ease-out;
+ }
+
+ #HeroText {
+   animation: fadeInUp 0.8s ease-out 0.2s both;
+ }
+
+ .btn-container {
+   animation: fadeInUp 0.8s ease-out 0.4s both;
+ }

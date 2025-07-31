@@ -1,0 +1,11 @@
+<!-- <p>callback works!</p> -->
+<div *ngIf="profile">
+    <h2>Welcome, {{ profile.display_name }}</h2>
+    <img *ngIf="profile.images?.length" [src]="profile.images[0].url" width="150" />
+  </div>
+  <div *ngIf="!profile">
+    <p>Loading...</p>
+  </div>
+  
+  <!-- <p>Email: {{ profile.email }}</p> -->
+  <!-- <p>Country: {{ profile.country }}</p> -->
