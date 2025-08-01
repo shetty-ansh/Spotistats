@@ -6,7 +6,7 @@ import { Component, OnInit } from '@angular/core';
   templateUrl: './callback.html',
   styleUrl: './callback.css'
 })
-export class Callback implements OnInit{
+export class Callback implements OnInit {
   profile: any = null;
 
   topTracksShort: any[] = [];
@@ -24,9 +24,9 @@ export class Callback implements OnInit{
       const profile = await this.fetchProfile(accessToken);
       this.profile = profile;
       this.topTracksShort = await this.fetchTop(accessToken, 'tracks', 'short_term');
-this.topTracksMedium = await this.fetchTop(accessToken, 'tracks', 'medium_term');
-this.topArtistsShort = await this.fetchTop(accessToken, 'artists', 'short_term');
-this.topArtistsMedium = await this.fetchTop(accessToken, 'artists', 'medium_term');
+      this.topTracksMedium = await this.fetchTop(accessToken, 'tracks', 'medium_term');
+      this.topArtistsShort = await this.fetchTop(accessToken, 'artists', 'short_term');
+      this.topArtistsMedium = await this.fetchTop(accessToken, 'artists', 'medium_term');
 
     }
   }
@@ -60,12 +60,12 @@ this.topArtistsMedium = await this.fetchTop(accessToken, 'artists', 'medium_term
   }
 
   async fetchTop(token: string, type: string, timeRange: string): Promise<any[]> {
-  const result = await fetch(`https://api.spotify.com/v1/me/top/${type}?time_range=${timeRange}&limit=10`, {
-    method: "GET",
-    headers: { Authorization: `Bearer ${token}` }
-  });
-  const data = await result.json();
-  return data.items || [];
-}
+    const result = await fetch(`https://api.spotify.com/v1/me/top/${type}?time_range=${timeRange}&limit=10`, {
+      method: "GET",
+      headers: { Authorization: `Bearer ${token}` }
+    });
+    const data = await result.json();
+    return data.items || [];
+  }
 
 }
