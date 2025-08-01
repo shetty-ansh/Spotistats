@@ -35,7 +35,7 @@
    box-sizing: border-box;
  }
 #SpotifyLogo {
-  background-image: url('../../assets/SpotifyTextLogo.png');
+  /* background-image: url('../../assets/SpotifyTextLogo.png'); */
   background-size: contain;
   background-repeat: no-repeat;
   background-position: center;

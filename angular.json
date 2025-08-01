@@ -34,11 +34,11 @@
                 "input": "public"
               }
             ],
-            "styles": [
-              "https://fonts.googleapis.com/css2?family=Nunito:wght@400;700&display=swap",
-              "node_modules/@fortawesome/fontawesome-free/css/all.min.css",
-              "src/styles.css"
-            ]
+           "styles": [
+  "node_modules/@fortawesome/fontawesome-free/css/all.min.css",
+  "src/styles.css"
+]
+
           },
           "configurations": {
             "production": {

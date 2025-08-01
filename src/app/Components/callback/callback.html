@@ -1,11 +1,62 @@
-<!-- <p>callback works!</p> -->
+<p>callback works!</p>
 <div *ngIf="profile">
-    <h2>Welcome, {{ profile.display_name }}</h2>
-    <img *ngIf="profile.images?.length" [src]="profile.images[0].url" width="150" />
+  <h2>Welcome, {{ profile.display_name }}</h2>
+  <img *ngIf="profile.images?.length" [src]="profile.images[0].url" width="150" />
+</div>
+<div *ngIf="!profile">
+  <p>Loading...</p>
+</div>
+
+<p>Email: {{ profile.email }}</p>
+<p>Country: {{ profile.country }}</p>
+
+<div *ngIf="topTracksShort.length">
+  <h3>Top Tracks (1 Month)</h3>
+  <ul>
+    <li *ngFor="let track of topTracksShort">
+      <img [src]="track.album.images[0].url" alt="Track Image" width="100" />
+      {{ track.name }} – {{ track.artists[0]?.name }}
+    </li>
+  </ul>
+</div>
+
+<div *ngIf="topTracksMedium.length">
+  <h3>Top Tracks (6 Months)</h3>
+  <ul>
+    <li *ngFor="let track of topTracksMedium">
+      <img [src]="track.album.images[0].url" alt="Track Image" width="100" />
+      {{ track.name }} – {{ track.artists[0]?.name }}
+    </li>
+  </ul>
+</div>
+
+<div *ngIf="topArtistsShort.length">
+  <h3>Top Artists (1 Month)</h3>
+  <ul>
+    <li *ngFor="let artist of topArtistsShort">
+      <img [src]="artist.images[0].url" alt="Track Image" width="100" />
+      {{ artist.name }}
+    </li>
+  </ul>
+</div>
+
+<div *ngIf="topArtistsMedium.length">
+  <h3>Top Artists (6 Months)</h3>
+  <ul>
+    <li *ngFor="let artist of topArtistsMedium">
+      <img [src]="artist.images[0].url" alt="Track Image" width="100" />
+      {{ artist.name }}
+    </li>
+  </ul>
+</div>
+
+
+<!-- <div id="BG">
+  <div id="Left">
+    <div id="Profile">
+      <div id="ProfileImage"></div>
+      <div id="ProfileInfo"></div>
+    </div>
   </div>
-  <div *ngIf="!profile">
-    <p>Loading...</p>
-  </div>
-  
-  <!-- <p>Email: {{ profile.email }}</p> -->
-  <!-- <p>Country: {{ profile.country }}</p> -->
+  <div id="Right"></div>
+</div> -->
