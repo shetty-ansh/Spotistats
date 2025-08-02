@@ -14,6 +14,8 @@ export class Callback implements OnInit {
   topArtistsShort: any[] = [];
   topArtistsMedium: any[] = [];
 
+  isToggled = false;
+
   async ngOnInit() {
     const clientId = "74c9a58619d7490c88ebeb90616810d5";
     const params = new URLSearchParams(window.location.search);
@@ -67,5 +69,9 @@ export class Callback implements OnInit {
     const data = await result.json();
     return data.items || [];
   }
+
+  toggleSwitch() {
+  this.isToggled = !this.isToggled;
+}
 
 }

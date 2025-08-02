@@ -93,13 +93,13 @@
         <div id="NextTrack"></div>
       </div>
       <div id="Right">
-        <div id="TrackContainer" *ngFor="let track of dummyTracks">
+        <div id="TrackContainer" *ngFor="let track of topTracksShort">
           <div class="track-image">
-            <!-- <img [src]="track.album.images[0].url" alt="Track Image" /> -->
+            <img [src]="track.album.images[0].url" alt="Track Image" />
           </div>
           <div class="track-info">
-            <h3>Track Name</h3>
-            <h4>Artists</h4>
+            <h3>{{ track.name }}</h3>
+            <h4>{{ track.artists[0]?.name }}</h4>
           </div>
         </div>
 

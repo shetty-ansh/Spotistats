@@ -311,10 +311,19 @@ h3 {
 }
 
 #Right{
-    height: 100%;
+    height: calc(100% - 30px);
     width: 50%;
     background-color: blueviolet;
     border-radius: 30px;
+    padding: 15px;
+    padding-left: 25px;
+    /* gap: 20px; */
+    overflow: auto;
+    z-index: 5;
+}
+
+#Right::-webkit-scrollbar{
+    background-color: transparent;
 }
 
 #TrackContainer {
@@ -322,15 +331,16 @@ h3 {
   align-items: center;
   background-color: white;
   border-radius: 30px;
-  padding: 20px;
-  margin: 20px;
-  width: fit-content;
+  padding: 10px;
+  height: 25%;
+  width: calc(100% - 20px);
   box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+  margin-bottom: 10px;
 }
 
 .track-image img {
-  width: 120px;
-  height: 120px;
+  width: 100px;
+  height: 100px;
   border-radius: 20px;
   object-fit: cover;
   margin-right: 20px;
@@ -340,10 +350,11 @@ h3 {
   margin: 0;
   font-size: 24px;
   font-weight: bold;
+  color: black;
 }
 
 .track-info h4 {
   margin: 5px 0 0;
   font-size: 16px;
-  color: #333;
+  color: #676767;
 }
