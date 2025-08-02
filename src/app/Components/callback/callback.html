@@ -89,11 +89,27 @@
     </div>
     <div id="TracksBox">
       <div id="Left">
-        <div id="TopTrack"></div>
-        <div id="NextTrack"></div>
+        <div id="TopTrack">
+          <div class="track-image">
+            <img [src]="topTracksShort[0].album.images[0].url" alt="Track Image" />
+          </div>
+          <div class="track-info">
+            <h3>{{ topTracksShort[0].name }}</h3>
+            <h4>{{ topTracksShort[0].artists[0]?.name }}</h4>
+          </div>
+        </div>
+        <div id="SecondTrack">
+          <div class="track-image">
+            <img [src]="topTracksShort[1].album.images[0].url" alt="Track Image" />
+          </div>
+          <div class="track-info">
+            <h3>{{ topTracksShort[1].name }}</h3>
+            <h4>{{ topTracksShort[1].artists[0]?.name }}</h4>
+          </div>
+        </div>
       </div>
       <div id="Right">
-        <div id="TrackContainer" *ngFor="let track of topTracksShort">
+        <div id="TrackContainer" *ngFor="let track of topTracksShort |  slice:2">
           <div class="track-image">
             <img [src]="track.album.images[0].url" alt="Track Image" />
           </div>

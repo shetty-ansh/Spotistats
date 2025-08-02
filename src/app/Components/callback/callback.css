@@ -295,6 +295,8 @@ h3 {
 }
 
 #TopTrack{
+    display: flex;
+    flex-direction: row;
     height: 55%;
     width: calc(100% - 20px);
     background-color: rgb(255, 204, 0);
@@ -302,7 +304,9 @@ h3 {
     /* margin-top: 20px; */
 }
 
-#NextTrack{
+#SecondTrack{
+    display: flex;
+    flex-direction: row;
     height: 40%;
     width: calc(100% - 20px);
     background-color: rgb(255, 204, 0);
