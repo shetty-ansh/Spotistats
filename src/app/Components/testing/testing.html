@@ -1,93 +1,13 @@
-<!-- <p>callback works!</p>
-<div *ngIf="profile">
-  <h2>Welcome, {{ profile.display_name }}</h2>
-  <img *ngIf="profile.images?.length" [src]="profile.images[0].url" width="150" />
-</div>
-<div *ngIf="!profile">
-  <p>Loading...</p>
-</div>
-
-<p>Email: {{ profile.email }}</p>
-<p>Country: {{ profile.country }}</p>
-
-<div *ngIf="topTracksShort.length">
-  <h3>Top Tracks (1 Month)</h3>
-  <ul>
-    <li *ngFor="let track of topTracksShort">
-      <img [src]="track.album.images[0].url" alt="Track Image" width="100" />
-      {{ track.name }} – {{ track.artists[0]?.name }}
-    </li>
-  </ul>
-</div>
-
-<div *ngIf="topTracksMedium.length">
-  <h3>Top Tracks (6 Months)</h3>
-  <ul>
-    <li *ngFor="let track of topTracksMedium">
-      <img [src]="track.album.images[0].url" alt="Track Image" width="100" />
-      {{ track.name }} – {{ track.artists[0]?.name }}
-    </li>
-  </ul>
-</div>
-
-<div *ngIf="topArtistsShort.length">
-  <h3>Top Artists (1 Month)</h3>
-  <ul>
-    <li *ngFor="let artist of topArtistsShort">
-      <img [src]="artist.images[0].url" alt="Track Image" width="100" />
-      {{ artist.name }}
-    </li>
-  </ul>
-</div>
-
-<div *ngIf="topArtistsMedium.length">
-  <h3>Top Artists (6 Months)</h3>
-  <ul>
-    <li *ngFor="let artist of topArtistsMedium">
-      <img [src]="artist.images[0].url" alt="Track Image" width="100" />
-      {{ artist.name }}
-    </li>
-  </ul>
-</div>
- -->
-
-<!-- //////////////////////////////////////////////////////////////////////////////////////////////////// -->
-
-<!-- <div id="BG">
-  <div id="Left">
-    <div id="Profile">
-      <div id="ProfileImage"></div>
-      <div id="ProfileInfo"></div>
-    </div>
-  </div>
-  <div id="Right"></div>
-</div> -->
-
-<!-- //////////////////////////////////////////////////////////////////////////////////////////////////// -->
-
-<div class="app-container">
-  <!-- Header -->
-  <!-- <header class="header">
-            <div class="logo-section">
-                <div class="logo">♪</div>
-                <span class="header-title">Premium</span>
-            </div>
-            <div class="user-section">
-                <span>Username</span>
-                <div class="user-avatar"></div>
-            </div>
-        </header> -->
-
-  <!-- Sidebar -->
-<div class="sidebar">
+<div id="MainContainer">
+  <div class="sidebar">
     <div id="ProfielSection">
-        <div id="ProfileImage">
-            <!-- <img *ngIf="profile.images?.length" [src]="profile.images[0].url" /> -->
-        </div>
-    
-    <h2 class="profile-title">Ansh Shetty</h2>
-    <h3 style="margin-top: 5px;">India</h3>
-</div>
+      <div id="ProfileImage">
+        <!-- <img *ngIf="profile.images?.length" [src]="profile.images[0].url" /> -->
+      </div>
+
+      <h2 class="profile-title">Ansh Shetty</h2>
+      <h3 style="margin-top: 5px;">India</h3>
+    </div>
 
     <div class="nav-section">
       <div class="nav-item  ">My Top 10</div>
@@ -101,51 +21,46 @@
       <button class="btn">Log Out</button>
     </div>
 
+  </div>
+  <div id="StatsContainer">
+    <div class="switch-container" [class.switched]="isToggled" (click)="toggleSwitch()">
+      <div class="switch-slider"></div>
+      <div class="switch-options">
+        <div class="switch-option" ng-class="{'active': !isToggled}">
+          Last Month
+        </div>
+        <div class="switch-option" ng-class="{'active': isToggled}">
+          6 Months
+        </div>
+      </div>
+    </div>
+    <div id="TracksBox">
+      <div id="Left">
+        <div id="TopTrack"></div>
+        <div id="NextTrack"></div>
+      </div>
+      <div id="Right">
+        <div id="TrackContainer" *ngFor="let track of dummyTracks">
+          <div class="track-image">
+            <!-- <img [src]="track.album.images[0].url" alt="Track Image" /> -->
+          </div>
+          <div class="track-info">
+            <h3>Track Name</h3>
+            <h4>Artists</h4>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
 </div>
 
-  <!-- Main Content -->
-  <main class="main-content">
-    <!-- <div class="content-header">
-                <h1 class="content-title">System & Settings</h1>
-            </div>
-
-            <div class="settings-grid">
-                <div class="settings-card">
-                    <h3 class="card-title">Language</h3>
-                    <p class="card-description">Choose Language</p>
-                </div>
-
-                <div class="settings-card">
-                    <h3 class="card-title">Explicit Content</h3>
-                    <p class="card-description">Block explicit content</p>
-                </div>
-
-                <div class="settings-card">
-                    <h3 class="card-title">Music Quality</h3>
-                    <p class="card-description">Streaming Quality</p>
-                </div>
-
-                <div class="settings-card">
-                    <h3 class="card-title">Devices</h3>
-                    <p class="card-description">Connect to a device - Listen to and control Spotify on your devices</p>
-                </div>
-            </div> -->
-  </main>
-
-  <!-- Bottom Player -->
-  <!-- <div class="bottom-player">
-            <div class="player-info">
-                <div class="album-art"></div>
-                <div class="track-info">
-                    <div class="track-title">Track Name</div>
-                    <div class="track-artist">Artist</div>
-                </div>
-            </div>
-            
-            <div class="player-controls">
-                <button class="control-btn"></button>
-                <button class="control-btn play-btn"></button>
-                <button class="control-btn"></button>
-            </div>
+<!-- <div id="TrackContainer" *ngFor="let track of topTracksShort">
+          <div class="track-image">
+            <img [src]="track.album.images[0].url" alt="Track Image" />
+          </div>
+          <div class="track-info">
+            <h3>{{ track.name }}</h3>
+            <h4>{{ track.artists[0]?.name }}</h4>
+          </div>
         </div> -->
-</div>
