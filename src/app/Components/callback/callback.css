@@ -1,156 +1,63 @@
+* {
+  font-family: 'Dongle', sans-serif;
+}
+
 #MainContainer {
+  min-height: 100vh;
+  width: 100%;
+  background-color: black;
+  position: relative;
+  overflow: hidden;
+}
+
+#MainContainer::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  background-image:
+    radial-gradient(circle at 50% 100%, rgba(70, 85, 110, 0.5) 0%, transparent 60%),
+    radial-gradient(circle at 50% 100%, rgba(99, 102, 241, 0.4) 0%, transparent 70%),
+    radial-gradient(circle at 50% 100%, rgba(181, 184, 208, 0.3) 0%, transparent 80%);
+}
+
+
+
+#Header{
     display: flex;
     flex-direction: row;
+    background-color: transparent;
 }
 
-/* Sidebar */
-
-.sidebar {
-    display: flex;
-    flex-direction: column;
-    background: rgb(103, 103, 103);
-    /* padding: 24px; */
-    border-right: 1px solid rgba(255, 255, 255, 0.1);
-    height: 100vh;
-    width: 20%;
-}
-
-/* #ProfileImage{
-            border-radius: 50%;
-            border: 2px red dotted;
-            height: 150px;
-            width: 150px;
-        } */
 #ProfielSection {
     display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    margin-bottom: 30px;
-}
-
-#ProfielSection h2,
-h3 {
-    color: white;
+    flex-direction: row;
+    font-size: xx-large;
+    background-color: aqua;
+    height: 100px;
+    /* left: 0; */
+    /* padding-left: 20px; */
+    width: 250px;
 }
 
 #ProfileImage {
-    margin-top: 30px;
+    margin-top: 15px;
     margin-bottom: 20px;
-    width: 150px;
-    height: 150px;
+    width: 75px;
+    height: 75px;
     border-radius: 50%;
     overflow: hidden;
 }
 
 #ProfileImage img {
-    width: 100%;
-    height: 100%;
+    width: 75px;
+    height: 75px;
     object-fit: cover;
 }
 
-
-.nav-section {
+#ProfileInfo{
     display: flex;
     flex-direction: column;
-    margin-bottom: 32px;
-    /* background-color: #ee5a24; */
-    width: 100%;
-    justify-content: center;
-    align-items: center;
-    text-align: left;
-}
-
-.nav-item {
-    /* background: rgba(255, 255, 255, 0.05); */
-    background-color: transparent;
-    border-radius: 8px;
-    padding: 10px 10px;
-    margin-bottom: 6px;
-    cursor: pointer;
-    transition: all 0.2s ease;
-    color: gray;
-    text-align: left;
-    /* display: inline-block; */
-
-
-}
-
-.nav-item:hover {
-    background: rgba(255, 255, 255, 0.1);
-    color: azure;
-}
-
-.action-buttons {
-    display: flex;
-    gap: 8px;
-    margin-top: 50px;
-    width: 100%;
-    justify-content: center;
-    align-items: center;
-}
-
-.btn {
-    padding: 12px 30px;
-    border-radius: 20px;
-    border: 1px solid rgba(255, 255, 255, 0.2);
-    background: green;
-    color: #fff;
-    font-size: 15px;
-    cursor: pointer;
-    transition: all 0.2s ease;
-}
-
-.btn:hover {
-    background: rgba(255, 255, 255, 0.1);
-}
-
-/* Main Content */
-.main-content {
-    padding: 32px;
-    overflow-y: auto;
-}
-
-.content-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 32px;
-}
-
-.content-title {
-    font-size: 32px;
-    font-weight: 700;
-}
-
-.settings-grid {
-    display: grid;
-    gap: 24px;
-}
-
-.settings-card {
-    background: rgba(255, 255, 255, 0.05);
-    border-radius: 12px;
-    padding: 24px;
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    transition: all 0.2s ease;
-}
-
-.settings-card:hover {
-    background: rgba(255, 255, 255, 0.08);
-    border-color: rgba(255, 255, 255, 0.2);
-}
-
-.card-title {
-    font-size: 18px;
-    font-weight: 600;
-    margin-bottom: 8px;
-}
-
-.card-description {
-    color: rgba(255, 255, 255, 0.7);
-    font-size: 14px;
-    line-height: 1.5;
 }
 
 /* MainContent */
@@ -158,8 +65,8 @@ h3 {
 #StatsContainer {
     display: flex;
     flex-direction: column;
-    width: 80%;
-    background-color: black;
+    width: 100%;
+    background-color: transparent;
     min-height: 100vh;
     position: relative;
     align-items: center;  
@@ -173,16 +80,26 @@ h3 {
     position: absolute;
     inset: 0;
     z-index: 0;
-    background-image:
+    background-color: transparent;
+    /* background-image:
         radial-gradient(circle at 50% 100%, rgba(70, 85, 110, 0.5) 0%, transparent 60%),
         radial-gradient(circle at 50% 100%, rgba(99, 102, 241, 0.4) 0%, transparent 70%),
-        radial-gradient(circle at 50% 100%, rgba(181, 184, 208, 0.3) 0%, transparent 80%);
+        radial-gradient(circle at 50% 100%, rgba(181, 184, 208, 0.3) 0%, transparent 80%); */
+}
+
+#ToggleContainer{
+    display: flex;
+    /* margin-left: calc(100%-250px); */
+    margin-left: 250px;
+    width:80%;
+    padding: 25px;
 }
 
 
         .switch-container {
             position: relative;
             display: inline-block;
+            max-height: 50px;
             background: rgba(255, 255, 255, 0.2);
             backdrop-filter: blur(10px);
             border: 1px solid rgba(255, 255, 255, 0.3);
@@ -314,17 +231,19 @@ h3 {
     margin-top: 5%;
 }
 
-#Right{
+#Right {
     height: calc(100% - 30px);
     width: 50%;
-    background-color: blueviolet;
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
     border-radius: 30px;
     padding: 15px;
     padding-left: 25px;
-    /* gap: 20px; */
     overflow: auto;
     z-index: 5;
 }
+
 
 #Right::-webkit-scrollbar{
     background-color: transparent;
@@ -333,7 +252,9 @@ h3 {
 #TrackContainer {
   display: flex;
   align-items: center;
-  background-color: white;
+  background: rgba(215, 215, 215, 0.274);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
   border-radius: 30px;
   padding: 10px;
   height: 25%;
@@ -342,23 +263,30 @@ h3 {
   margin-bottom: 10px;
 }
 
+.track-image{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    /* margin-top: 5px; */
+}
+
 .track-image img {
-  width: 100px;
-  height: 100px;
+  width: 90px;
+  height: 90px;
   border-radius: 20px;
   object-fit: cover;
   margin-right: 20px;
 }
 
-.track-info h3 {
+#TrackTitle {
   margin: 0;
-  font-size: 24px;
+  font-size: 40px;
   font-weight: bold;
   color: black;
 }
 
-.track-info h4 {
-  margin: 5px 0 0;
-  font-size: 16px;
-  color: #676767;
+#TrackArtist{
+  /* margin: 5px 0 0; */
+  font-size: 26px;
+  color: #ffffff;
 }

@@ -13,3 +13,6 @@ html, body {
   right: 0;
   overflow: auto;
 }
+* {
+  font-family: 'Comfortaa', cursive;
+}

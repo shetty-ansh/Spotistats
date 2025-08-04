@@ -52,10 +52,10 @@
 
 
 <div id="MainContainer">
-  <div class="sidebar">
+  <!-- <div class="sidebar">
     <div id="ProfielSection">
       <div id="ProfileImage">
-        <!-- <img *ngIf="profile.images?.length" [src]="profile.images[0].url" /> -->
+        <img *ngIf="profile.images?.length" [src]="profile.images[0].url" />
       </div>
 
       <h2 class="profile-title">Ansh Shetty</h2>
@@ -70,52 +70,55 @@
     </div>
 
     <div class="action-buttons">
-      <!-- <button class="btn">View Account</button> -->
+      <button class="btn">View Account</button>
       <button class="btn">Log Out</button>
-    </div>
+    </div> 
 
+  </div>-->
+  <div id="Header">
+    <div id="ProfielSection">
+    <div id="ProfileImage">
+      <img *ngIf="profile.images?.length" [src]="profile.images[0].url" />
+    </div>
+    <div id="ProfileInfo">
+      <h4 class="profile-title">Ansh Shetty</h4>
+    <h5>India</h5>
+    </div>
+    
   </div>
-  <div id="StatsContainer">
+  <div id="ToggleContainer">
     <div class="switch-container" [class.switched]="isToggled" (click)="toggleSwitch()">
-      <div class="switch-slider"></div>
-      <div class="switch-options">
-        <div class="switch-option" ng-class="{'active': !isToggled}">
-          Last Month
-        </div>
-        <div class="switch-option" ng-class="{'active': isToggled}">
-          6 Months
-        </div>
+    <div class="switch-slider"></div>
+    <div class="switch-options">
+      <div class="switch-option" ng-class="{'active': !isToggled}">
+        Last Month
+      </div>
+      <div class="switch-option" ng-class="{'active': isToggled}">
+        6 Months
       </div>
     </div>
+  </div>
+  </div>
+      
+  </div>
+  <div id="StatsContainer">
     <div id="TracksBox">
       <div id="Left">
         <div id="TopTrack">
-          <div class="track-image">
-            <img [src]="topTracksShort[0].album.images[0].url" alt="Track Image" />
-          </div>
-          <div class="track-info">
-            <h3>{{ topTracksShort[0].name }}</h3>
-            <h4>{{ topTracksShort[0].artists[0]?.name }}</h4>
-          </div>
+          <h1>STATS</h1>
         </div>
         <div id="SecondTrack">
-          <div class="track-image">
-            <img [src]="topTracksShort[1].album.images[0].url" alt="Track Image" />
-          </div>
-          <div class="track-info">
-            <h3>{{ topTracksShort[1].name }}</h3>
-            <h4>{{ topTracksShort[1].artists[0]?.name }}</h4>
-          </div>
+          <h1>Your Top Tracks</h1>
         </div>
       </div>
       <div id="Right">
-        <div id="TrackContainer" *ngFor="let track of topTracksShort |  slice:2">
+        <div id="TrackContainer" *ngFor="let track of topTracksShort">
           <div class="track-image">
             <img [src]="track.album.images[0].url" alt="Track Image" />
           </div>
           <div class="track-info">
-            <h3>{{ track.name }}</h3>
-            <h4>{{ track.artists[0]?.name }}</h4>
+            <div id="TrackTitle">{{ track.name }}</div>
+            <div id="TrackArtist">{{ track.artists[0]?.name }}</div>
           </div>
         </div>
 
