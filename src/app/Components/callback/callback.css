@@ -23,238 +23,256 @@
 
 
 
-#Header{
-    display: flex;
-    flex-direction: row;
-    background-color: transparent;
+#Header {
+  display: flex;
+  flex-direction: row;
+  background-color: transparent;
 }
 
 #ProfielSection {
-    display: flex;
-    flex-direction: row;
-    font-size: xx-large;
-    background-color: aqua;
-    height: 100px;
-    /* left: 0; */
-    /* padding-left: 20px; */
-    width: 250px;
+  display: flex;
+  flex-direction: row;
+  font-size: xx-large;
+  padding-left: 20px;
+  background-color: transparent;
+  height: 100px;
+  width: 300px;
+  color: wheat;
 }
 
 #ProfileImage {
-    margin-top: 15px;
-    margin-bottom: 20px;
-    width: 75px;
-    height: 75px;
-    border-radius: 50%;
-    overflow: hidden;
+  margin-top: 15px;
+  margin-bottom: 20px;
+  width: 65px;
+  height: 65px;
+  border-radius: 50%;
+  overflow: hidden;
 }
 
 #ProfileImage img {
-    width: 75px;
-    height: 75px;
-    object-fit: cover;
+  width: 65px;
+  height: 65px;
+  object-fit: cover;
 }
 
-#ProfileInfo{
-    display: flex;
-    flex-direction: column;
+#ProfileInfo {
+  display: flex;
+  flex-direction: column;
+  color: beige;
+  height: 100px;
+  width: 150px;
+  gap: 0px;
+  padding-left: 20px;
+  padding-top: 0px;
 }
 
-/* MainContent */
 
 #StatsContainer {
-    display: flex;
-    flex-direction: column;
-    width: 100%;
-    background-color: transparent;
-    min-height: 100vh;
-    position: relative;
-    align-items: center;  
-    padding-top: 40px; 
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  background-color: transparent;
+  min-height: 100vh;
+  position: relative;
+  align-items: center;
+  padding-top: 40px;
 }
 
 
 
 #StatsContainer::before {
-    content: "";
-    position: absolute;
-    inset: 0;
-    z-index: 0;
-    background-color: transparent;
-    /* background-image:
-        radial-gradient(circle at 50% 100%, rgba(70, 85, 110, 0.5) 0%, transparent 60%),
-        radial-gradient(circle at 50% 100%, rgba(99, 102, 241, 0.4) 0%, transparent 70%),
-        radial-gradient(circle at 50% 100%, rgba(181, 184, 208, 0.3) 0%, transparent 80%); */
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  background-color: transparent;
 }
 
-#ToggleContainer{
-    display: flex;
-    /* margin-left: calc(100%-250px); */
-    margin-left: 250px;
-    width:80%;
-    padding: 25px;
+#ToggleContainer {
+  display: flex;
+  margin-left: 200px;
+  width: 80%;
+  padding: 25px;
+  padding-left: 35px;
+  text-align: center;
+  font-size: xx-large;
 }
 
 
-        .switch-container {
-            position: relative;
-            display: inline-block;
-            max-height: 50px;
-            background: rgba(255, 255, 255, 0.2);
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.3);
-            border-radius: 50px;
-            padding: 4px;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            user-select: none;
-            margin-bottom: 30px;
-        }
-
-        .switch-container:hover {
-            background: rgba(255, 255, 255, 0.25);
-            transform: translateY(-2px);
-            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
-        }
-
-        .switch-options {
-            display: flex;
-            position: relative;
-            z-index: 2;
-        }
-
-        .switch-option {
-            padding: 12px 24px;
-            border-radius: 50px;
-            font-size: 14px;
-            font-weight: 600;
-            transition: all 0.3s ease;
-            cursor: pointer;
-            position: relative;
-            color: rgba(255, 255, 255, 0.7);
-            min-width: 100px;
-        }
-
-        .switch-option.active {
-            color: white;
-            text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
-        }
-
-        .switch-slider {
-            position: absolute;
-            top: 4px;
-            left: 4px;
-            bottom: 4px;
-            width: calc(50% - 4px);
-            background: rgba(60, 60, 60, 0.8);
-            backdrop-filter: blur(10px);
-            border-radius: 50px;
-            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-            box-shadow: 
-                0 4px 12px rgba(0, 0, 0, 0.2),
-                inset 0 1px 0 rgba(255, 255, 255, 0.1);
-            z-index: 1;
-        }
-
-        .switch-container.switched .switch-slider {
-            transform: translateX(100%);
-            background: rgba(200, 200, 200, 0.9);
-        }
-
- .switch-container::before {
-            content: '';
-            position: absolute;
-            top: -1px;
-            left: -1px;
-            right: -1px;
-            bottom: -1px;
-            background: linear-gradient(45deg, rgba(255, 255, 255, 0.3), rgba(255, 255, 255, 0.1));
-            border-radius: 50px;
-            z-index: -1;
-            opacity: 0;
-            transition: opacity 0.3s ease;
-        }
-
-        .switch-container:hover::before {
-            opacity: 1;
-        }
-
-        /* Animation for content changes */
-        .content-fade {
-            animation: fadeIn 0.3s ease-in-out;
-        }
-
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(10px); }
-            to { opacity: 0.9; transform: translateY(0); }
-        }
-
-
-#TracksBox{
-    display: flex;
-    flex-direction: row;
-    background-color: transparent   ;
-    height: 400px;
-    width: calc(100% - 200px);
-    margin-left: 100px;
-    margin-right: 100px;
-    margin-top: 50px;
+.switch-container {
+  position: relative;
+  display: inline-block;
+  max-height: 50px;
+  background: rgba(255, 255, 255, 0.2);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  border-radius: 50px;
+  padding: 4px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  user-select: none;
+  margin-bottom: 30px;
 }
 
-#Left{
-    display: flex;
-    flex-direction: column;
-    /* height: calc(100% - 30px); */
-    height: 100%;
-    width: 50%;
-    background-color: transparent;
-    /* padding: 15px; */
+.switch-container:hover {
+  background: rgba(255, 255, 255, 0.25);
+  transform: translateY(-2px);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
 }
 
-#TopTrack{
-    display: flex;
-    flex-direction: row;
-    height: 55%;
-    width: calc(100% - 20px);
-    background-color: rgb(255, 204, 0);
-    border-radius: 30px;
-    /* margin-top: 20px; */
+.switch-options {
+  display: flex;
+  position: relative;
+  z-index: 2;
 }
 
-#SecondTrack{
-    display: flex;
-    flex-direction: row;
-    height: 40%;
-    width: calc(100% - 20px);
-    background-color: rgb(255, 204, 0);
-    border-radius: 30px;
-    margin-top: 5%;
+.switch-option {
+  padding: 12px 24px;
+  border-radius: 50px;
+  font-size: 14px;
+  font-weight: 600;
+  transition: all 0.3s ease;
+  cursor: pointer;
+  position: relative;
+  color: rgba(255, 255, 255, 0.7);
+  min-width: 100px;
+}
+
+.switch-option.active {
+  color: white;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+}
+
+.switch-slider {
+  position: absolute;
+  top: 4px;
+  left: 4px;
+  bottom: 4px;
+  width: calc(50% - 4px);
+  background: rgba(60, 60, 60, 0.8);
+  backdrop-filter: blur(10px);
+  border-radius: 50px;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow:
+    0 4px 12px rgba(0, 0, 0, 0.2),
+    inset 0 1px 0 rgba(255, 255, 255, 0.1);
+  z-index: 1;
+}
+
+.switch-container.switched .switch-slider {
+  transform: translateX(100%);
+  background: rgba(200, 200, 200, 0.9);
+}
+
+.switch-container::before {
+  content: '';
+  position: absolute;
+  top: -1px;
+  left: -1px;
+  right: -1px;
+  bottom: -1px;
+  background: linear-gradient(45deg, rgba(255, 255, 255, 0.3), rgba(255, 255, 255, 0.1));
+  border-radius: 50px;
+  z-index: -1;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.switch-container:hover::before {
+  opacity: 1;
+}
+
+.content-fade {
+  animation: fadeIn 0.3s ease-in-out;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+
+  to {
+    opacity: 0.9;
+    transform: translateY(0);
+  }
+}
+
+/* 
+#TracksBox {
+  display: flex;
+  flex-direction: row;
+  background-color: transparent;
+  height: 400px;
+  width: calc(100% - 200px);
+  margin-left: 100px;
+  margin-right: 100px;
+  margin-top: 50px;
+}
+
+#Left {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  width: 50%;
+  background-color: transparent;
+
+}
+
+#TopTrack {
+  display: flex;
+  flex-direction: row;
+  height: 55%;
+  width: calc(100% - 20px);
+  justify-content: center;
+  align-items: center;
+  background: rgba(255, 255, 255, 0.388);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border-radius: 30px;
+
+}
+
+#SecondTrack {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  height: 40%;
+  width: calc(100% - 20px);
+  background: rgba(255, 255, 255, 0.388);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border-radius: 30px;
+  margin-top: 5%;
+  color: white;
+  font-size: xx-large;
 }
 
 #Right {
-    height: calc(100% - 30px);
-    width: 50%;
-    background: rgba(255, 255, 255, 0.1);
-    backdrop-filter: blur(10px);
-    -webkit-backdrop-filter: blur(10px);
-    border-radius: 30px;
-    padding: 15px;
-    padding-left: 25px;
-    overflow: auto;
-    z-index: 5;
+  height: calc(100% - 30px);
+  width: 50%;
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border-radius: 30px;
+  padding: 15px;
+  padding-left: 25px;
+  overflow: auto;
+  z-index: 5;
 }
 
 
-#Right::-webkit-scrollbar{
-    background-color: transparent;
+#Right::-webkit-scrollbar {
+  background-color: transparent;
 }
 
 #TrackContainer {
   display: flex;
   align-items: center;
   background: rgba(215, 215, 215, 0.274);
-    backdrop-filter: blur(10px);
-    -webkit-backdrop-filter: blur(10px);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
   border-radius: 30px;
   padding: 10px;
   height: 25%;
@@ -263,11 +281,10 @@
   margin-bottom: 10px;
 }
 
-.track-image{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    /* margin-top: 5px; */
+.track-image {
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .track-image img {
@@ -285,8 +302,118 @@
   color: black;
 }
 
-#TrackArtist{
-  /* margin: 5px 0 0; */
+#TrackArtist {
   font-size: 26px;
   color: #ffffff;
+} */
+
+
+.carousel-container {
+  display: flex;
+  justify-content: center;
+  position: relative;
+  height: calc(100vh - 150px);
+  width: 100vw;
+  overflow: hidden;
+}
+
+.nav-button {
+  background: transparent;
+  border: none;
+  color: white;
+  font-size: 2.5rem;
+  z-index: 2;
+  cursor: pointer;
+  width: 100px;
+}
+
+
+.carousel-track {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: transform 0.5s ease-in-out;
+  gap: 10px;
+  width: 90%;
+}
+
+.carousel-card {
+  background: rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-radius: 38px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  color: white;
+  overflow: hidden;
+  text-align: center;
+  flex-shrink: 0;
+  transition: transform 0.4s ease, opacity 0.4s ease;
+  width: 240px;
+  height: 380px;
+  opacity: 0.3;
+  transform: scale(0.8);
+  padding: 8px;
+  display: flex;
+  flex-direction: column;
+}
+
+
+
+#Image {
+  display: flex;
+  height: calc(100% - 16px);
+  border-radius: 35px;
+  position: relative;
+  overflow: hidden;
+}
+
+#Image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 30px;
+  background-color: wheat;
+}
+
+.track-badge {
+  position: absolute;
+  bottom: 10px;
+  left: 10px;
+  height: 30px;
+  width: 33px;
+  border-radius: 50%;
+  background-color: rgba(255, 255, 255, 0.292);
+  color: white;
+  font-weight: bolder;
+  font-size: 24px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding-top: 3px;
+  box-shadow: 0 0 4px rgba(0, 0, 0, 0.4);
+}
+
+
+.track-info {
+  padding: 0.5rem;
+}
+
+.carousel-card.center {
+  transform: scale(1.1);
+  opacity: 1;
+  z-index: 3;
+}
+
+.carousel-card.left,
+.carousel-card.right {
+  transform: scale(0.85);
+  opacity: 0.6;
+  z-index: 2;
+}
+
+.carousel-card.far-left,
+.carousel-card.far-right {
+  transform: scale(0.7);
+  opacity: 0.3;
+  z-index: 1;
 }

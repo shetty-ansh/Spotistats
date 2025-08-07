@@ -9,12 +9,12 @@ import { Homepage } from './Components/homepage/homepage';
 import { Testing } from './Components/testing/testing';
 
 @NgModule({
-  declarations: [
+   declarations: [
     App,
     Login,
     Callback,
     Homepage,
-    Testing
+    Testing,
   ],
   imports: [
     BrowserModule,
