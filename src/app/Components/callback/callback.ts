@@ -104,13 +104,15 @@ export class Callback implements OnInit {
   topArtistsMedium: any[] = [];
 
   isToggled = false;
-currentIndex: number = 0;
+  currentIndex: number = 0;
 
   constructor(private spotifyService: SpotifyService) { }
 
   async ngOnInit() {
     const params = new URLSearchParams(window.location.search);
     const code = params.get("code");
+    const hash = window.location.hash;
+  const token = new URLSearchParams(hash.substring(1)).get('access_token');
 
     if (code) {
       const accessToken = await this.spotifyService.getAccessToken(code);
@@ -120,56 +122,66 @@ currentIndex: number = 0;
       this.topArtistsShort = await this.spotifyService.fetchTop(accessToken, 'artists', 'short_term');
       this.topArtistsMedium = await this.spotifyService.fetchTop(accessToken, 'artists', 'medium_term');
     }
+
+    if (token) {
+    localStorage.setItem('access_token', token);
+    this.spotifyService.setAccessToken(token);
+    this.fetchUserData(); // load profile + top tracks
+  }
+  
+  }
+  fetchUserData() {
+    throw new Error('Method not implemented.');
   }
 
- toggleSwitch() {
-  this.isToggled = !this.isToggled;
-  this.currentIndex = 0;
-}
-
-
-
-
-visibleTracks() {
-  const tracks = this.isToggled ? this.topTracksMedium : this.topTracksShort;
-  const start = this.currentIndex - 2;
-  const result = [];
-
-  for (let i = start; i < start + 5; i++) {
-    const index = (i + tracks.length) % tracks.length;
-    result.push(tracks[index]);
+  toggleSwitch() {
+    this.isToggled = !this.isToggled;
+    this.currentIndex = 0;
   }
 
-  return result;
-}
 
 
-getCardClass(i: number): string {
-  switch (i) {
-    case 0:
-      return 'far-left';
-    case 1:
-      return 'left';
-    case 2:
-      return 'center';
-    case 3:
-      return 'right';
-    case 4:
-      return 'far-right';
-    default:
-      return '';
+
+  visibleTracks() {
+    const tracks = this.isToggled ? this.topTracksMedium : this.topTracksShort;
+    const start = this.currentIndex - 2;
+    const result = [];
+
+    for (let i = start; i < start + 5; i++) {
+      const index = (i + tracks.length) % tracks.length;
+      result.push(tracks[index]);
+    }
+
+    return result;
   }
-}
 
-nextSlide() {
-  this.currentIndex = (this.currentIndex + 1) % this.topTracksShort.length;
-}
 
-prevSlide() {
-  this.currentIndex =
-    (this.currentIndex - 1 + this.topTracksShort.length) %
-    this.topTracksShort.length;
-}
+  getCardClass(i: number): string {
+    switch (i) {
+      case 0:
+        return 'far-left';
+      case 1:
+        return 'left';
+      case 2:
+        return 'center';
+      case 3:
+        return 'right';
+      case 4:
+        return 'far-right';
+      default:
+        return '';
+    }
+  }
+
+  nextSlide() {
+    this.currentIndex = (this.currentIndex + 1) % this.topTracksShort.length;
+  }
+
+  prevSlide() {
+    this.currentIndex =
+      (this.currentIndex - 1 + this.topTracksShort.length) %
+      this.topTracksShort.length;
+  }
 
 
 }

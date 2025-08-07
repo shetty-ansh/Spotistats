@@ -62,7 +62,8 @@
         <img *ngIf="profile.images?.length" [src]="profile.images[0].url" />
       </div>
       <div id="ProfileInfo">
-        <p class="profile-title">Ansh Shetty</p>
+        <p id="Name">{{ profile.display_name }}</p>
+        <p id="Country">{{ profile.country }}</p>
       </div>
     </div>
     <div id="ToggleContainer">

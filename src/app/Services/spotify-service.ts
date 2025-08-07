@@ -6,6 +6,7 @@ import { Injectable } from '@angular/core';
 export class SpotifyService {
   private clientId = '74c9a58619d7490c88ebeb90616810d5';
   private redirectUri = 'http://127.0.0.1:5173/callback';
+  private accessToken: string = '';
 
   getClientId(): string {
     return this.clientId;
@@ -14,6 +15,8 @@ export class SpotifyService {
   async getAccessToken(code: string): Promise<string> {
     const verifier = localStorage.getItem("verifier")!;
     const params = new URLSearchParams();
+
+
     params.append("client_id", this.clientId);
     params.append("grant_type", "authorization_code");
     params.append("code", code);
@@ -46,4 +49,9 @@ export class SpotifyService {
     const data = await result.json();
     return data.items || [];
   }
+
+  setAccessToken(token: string) {
+  this.accessToken = token;
+}
+
 }

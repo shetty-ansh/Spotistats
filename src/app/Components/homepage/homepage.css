@@ -22,7 +22,8 @@
    inset: 0;
    z-index: 0;
    background: radial-gradient(ellipse 80% 60% at 50% 0%, rgba(34, 197, 94, 0.25), rgba(0, 0, 0, 1) 70%);
- }
+  overflow-y: auto;
+  }
 
  #Header {
    position: relative;
@@ -56,16 +57,18 @@
    text-decoration: none;
    font-size: 16px;
    font-weight: 500;
-   padding: 8px 16px;
+   /* padding: 8px 16px; */
    border-radius: 20px;
    transition: all 0.2s ease;
    cursor: pointer;
  }
 
  .Socials:hover {
-   color: #1db954;
-   background-color: rgba(29, 185, 84, 0.1);
+   background-color: transparent;
+   /* background-color: rgba(29, 185, 84, 0.1); */
    transform: translateY(-2px);
+   text-shadow: 0 8px 25px rgba(177, 177, 177, 0.452);
+
  }
 
  #HeroText {
@@ -91,7 +94,7 @@
    background-clip: text;
    letter-spacing: -0.02em;
    line-height: 1.1;
-   text-shadow: 0 0 30px rgba(29, 185, 84, 0.3);
+   text-shadow: 0 0 30px rgba(255, 255, 255, 0.3);
  }
 
  .btn-container {
@@ -121,14 +124,25 @@
  }
 
  .nav-button:hover {
-   background: linear-gradient(135deg, #1ed760 0%, #1fdf64 100%);
+   background: transparent;
    transform: translateY(-3px);
-   box-shadow: 0 12px 35px rgba(29, 185, 84, 0.4);
+   box-shadow: 0 12px 35px rgb(255, 255, 255);
  }
 
  .nav-button:active {
    transform: translateY(-1px);
    box-shadow: 0 6px 20px rgba(29, 185, 84, 0.3);
+ }
+
+
+ #Footer{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-top: 400px;
+  margin-bottom: 100px;
+  color: wheat;
  }
 
  /* Responsive Design */
