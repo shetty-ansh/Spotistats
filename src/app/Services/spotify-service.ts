@@ -53,5 +53,22 @@ export class SpotifyService {
   setAccessToken(token: string) {
   this.accessToken = token;
 }
+async fetchCurrentlyPlaying(token: string): Promise<any> {
+  const result = await fetch("https://api.spotify.com/v1/me/player/currently-playing", {
+    headers: { Authorization: `Bearer ${token}` }
+  });
+  if (result.status === 204) return null;
+  return await result.json();
+}
+
+async fetchRecentlyPlayed(token: string): Promise<any[]> {
+  const result = await fetch("https://api.spotify.com/v1/me/player/recently-played?limit=50", {
+    headers: { Authorization: `Bearer ${token}` }
+  });
+  const data = await result.json();
+  return data.items || [];
+}
+
+
 
 }
