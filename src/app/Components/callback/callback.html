@@ -98,86 +98,70 @@
 
 
 
+<div class="dashboard-container">
+  <!-- Top row -->
+  <div class="dashboard-row">
+    <!-- Empty Div (Top Left) -->
+    <div class="dashboard-card empty-card">
+      <h3>Empty Div</h3>
+      <p>Total Tracks: {{ recentTracks.length }}</p>
+    </div>
 
-
-
-<!-- 
-<div>
-  <h2>Recently Played Tracks</h2>
-
-  <div *ngIf="!recentTracks || recentTracks.length === 0">
-    <p>No tracks found. Please connect to Spotify.</p>
+    <!-- First Song in Recently Played -->
+    <div class="dashboard-card song-card" *ngIf="recentTracks.length > 0">
+      <div id="first-track">
+        <div
+          class="album-cover"
+          id="main-album-cover"
+          [style.background-image]="'url(' + recentTracks[0].track.album.images[0].url + ')'"
+        ></div>
+        <h3 id="main-track-name">{{ recentTracks[0].track.name }}</h3>
+        <p id="main-artist-name">{{ recentTracks[0].track.artists[0].name }}</p>
+        <p class="played-time">Played at: {{ recentTracks[0].played_at | date: 'shortTime' }}</p>
+      </div>
+    </div>
   </div>
 
-
-  <ul *ngIf="recentTracks && recentTracks.length > 0">
-    <li *ngFor="let item of recentTracks">
-      <img [src]="item.track.album.images[0]?.url" alt="Album cover" width="50" height="50">
-      <span>{{ item.track.name }} — {{ item.track.artists[0]?.name }}</span>
-      <small>(Played at: {{ item.played_at | date:'shortTime' }})</small>
-    </li>
-  </ul>
-</div> -->
-
-
-
-
-   <div class="dashboard-container">
-        <!-- Top row -->
-        <div class="dashboard-row">
-            <!-- Empty Div (Top Left) -->
-            <div class="dashboard-card empty-card">
-                <h3>Empty Div</h3>
-                <p>Total Tracks: 50</p>
-            </div>
-            
-            <!-- First Song in Recently Played -->
-            <div class="dashboard-card song-card">
-                <div id="first-track">
-                    <div class="album-cover" id="main-album-cover" style="background-image: url('https://via.placeholder.com/150');"></div>
-                    <h3 id="main-track-name">Track Name Placeholder</h3>
-                    <p id="main-artist-name">Artist Name Placeholder</p>
-                    <p class="played-time">Played at: 10:30 AM</p>
-                </div>
-            </div>
+  <!-- Bottom row -->
+  <div class="dashboard-row">
+    <!-- Scrollable Past 50 Songs -->
+    <div class="dashboard-card scrollable-card">
+      <h3>Listening History</h3>
+      <div class="scrollable-content" id="tracks-list">
+        <div
+          class="track-item"
+          *ngFor="let track of recentTracks; let i = index"
+          [attr.data-index]="i + 1"
+        >
+          <div class="small-album-cover">
+            <img
+              *ngIf="track.track?.album?.images?.length"
+              [src]="track.track.album.images[0].url"
+              [alt]="track.track.name + ' album cover'"
+              width="100"
+              (error)="$event.target.style.display='none'"
+            />
+            <div class="placeholder-small" *ngIf="!track.track?.album?.images?.length">♪</div>
+          </div>
+          <div class="track-info">
+            <span class="track-name" style="margin-bottom: 5px;">{{ track.track.name }}</span>
+            <span class="artist-name">{{ track.track.artists[0]?.name }}</span>
+          </div>
+          <span class="played-time">{{ track.played_at | date: 'shortTime' }}</span>
         </div>
-
-        <!-- Bottom row -->
-        <div class="dashboard-row">
-            <!-- Scrollable Past 50 Songs -->
-            <div class="dashboard-card scrollable-card">
-                <h3>Scrollable past 50 songs</h3>
-                <div class="scrollable-content" id="tracks-list">
-                    <div class="track-item" data-index="2">
-                        <div class="small-album-cover" style="background-image: url('https://via.placeholder.com/64');"></div>
-                        <div class="track-info">
-                            <span class="track-name">Track Name 2</span>
-                            <span class="artist-name">Artist 2</span>
-                            <span class="played-time">10:25 AM</span>
-                        </div>
-                    </div>
-                    <div class="track-item" data-index="3">
-                        <div class="small-album-cover" style="background-image: url('https://via.placeholder.com/64');"></div>
-                        <div class="track-info">
-                            <span class="track-name">Track Name 3</span>
-                            <span class="artist-name">Artist 3</span>
-                            <span class="played-time">10:20 AM</span>
-                        </div>
-                    </div>
-                    <!-- Repeat as needed -->
-                </div>
-            </div>
-
-            <!-- Empty Divs (Right side) -->
-            <div class="dashboard-card-column">
-                <div class="dashboard-card empty-card small">
-                    <h3>Empty Div</h3>
-                    <p>Authenticated ✓</p>
-                </div>
-                <div class="dashboard-card empty-card small">
-                    <h3>Empty Div</h3>
-                    <p>Ready to expand</p>
-                </div>
-            </div>
-        </div>
+      </div>
     </div>
+
+    <!-- Empty Divs (Right side) -->
+    <div class="dashboard-card-column">
+      <div class="dashboard-card empty-card small">
+        <h3>Empty Div</h3>
+        <p>Authenticated ✓</p>
+      </div>
+      <div class="dashboard-card empty-card small">
+        <h3>Empty Div</h3>
+        <p>Ready to expand</p>
+      </div>
+    </div>
+  </div>
+</div>
