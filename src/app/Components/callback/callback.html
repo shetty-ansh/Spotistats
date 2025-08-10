@@ -1,62 +1,11 @@
-<!-- <p>callback works!</p>
-<div *ngIf="profile">
-  <h2>Welcome, {{ profile.display_name }}</h2>
-  <img *ngIf="profile.images?.length" [src]="profile.images[0].url" width="150" />
-</div>
-<div *ngIf="!profile">
-  <p>Loading...</p>
-</div>
-
-<p>Email: {{ profile.email }}</p>
-<p>Country: {{ profile.country }}</p>
-
-<div *ngIf="topTracksShort.length">
-  <h3>Top Tracks (1 Month)</h3>
-  <ul>
-    <li *ngFor="let track of topTracksShort">
-      <img [src]="track.album.images[0].url" alt="Track Image" width="100" />
-      {{ track.name }} – {{ track.artists[0]?.name }}
-    </li>
-  </ul>
-</div>
-
-<div *ngIf="topTracksMedium.length">
-  <h3>Top Tracks (6 Months)</h3>
-  <ul>
-    <li *ngFor="let track of topTracksMedium">
-      <img [src]="track.album.images[0].url" alt="Track Image" width="100" />
-      {{ track.name }} – {{ track.artists[0]?.name }}
-    </li>
-  </ul>
-</div>
-
-<div *ngIf="topArtistsShort.length">
-  <h3>Top Artists (1 Month)</h3>
-  <ul>
-    <li *ngFor="let artist of topArtistsShort">
-      <img [src]="artist.images[0].url" alt="Track Image" width="100" />
-      {{ artist.name }}
-    </li>
-  </ul>
-</div>
-
-<div *ngIf="topArtistsMedium.length">
-  <h3>Top Artists (6 Months)</h3>
-  <ul>
-    <li *ngFor="let artist of topArtistsMedium">
-      <img [src]="artist.images[0].url" alt="Track Image" width="100" />
-      {{ artist.name }}
-    </li>
-  </ul>
-</div>  -->
+ <!-- <div id="MainContainer">
+  <div id="Container">
+  </div>
+  </div> -->
 
 
 
-<!-- /////////////////////////////////////////////////////////////////////////////////////////////// -->
-
-
-<!-- <div id="MainContainer">
-  <div id="Header">
+ <!-- <div id="Header">
     <div id="ProfielSection">
       <div id="ProfileImage">
         <img *ngIf="profile.images?.length" [src]="profile.images[0].url" />
@@ -94,34 +43,43 @@
     </div>
     <button class="nav-button right" (click)="nextSlide()">›</button>
   </div>
-</div>  -->
-
+</div> 
+ -->
 
 <div class="dashboard-container">
+  <h1>Your Listening History</h1>
   <!-- Top row -->
   <div class="dashboard-row top">
     <!-- Empty Div (Top Left) -->
     <div class="dashboard-card now-playing-card">
-      <div class="now-playing-card-top">Currently Playing</div>
-      <!-- <If no song is cirrently playiong, display the last played track here> -->
+      <div class="now-playing-card-top">{{ currentSongData ? "Currently Playing" : "Last Played" }}</div>
+      <div id="current-track-cover">
+        <img *ngIf="currentSong?.album?.images?.[0]?.url" [src]="currentSong.album.images[0].url"
+          [alt]="currentSong.name + ' album cover'" />
+      </div>
+
+      <div id="current-track-data">
+        <div id="current-track-name">{{ currentSong?.name }}</div>
+        <div id="current-artist">{{ currentSong?.artists?.[0]?.name }}</div>
+        <!-- <div id="current-duration">{{ formatDuration(currentSong?.duration_ms) }}</div> -->
+      </div>
+
     </div>
 
     <!-- Selected Song in Recently Played -->
     <div class="dashboard-card song-card" *ngIf="(recentTracks?.length || 0) > 0">
       <div id="selected-track">
-        <div class="album-cover" id="main-album-cover" ><img 
-    *ngIf="recentTracks?.[0]?.track?.album?.images?.[0]?.url" 
-    [src]="recentTracks[0].track.album.images[0].url" 
-    [alt]="recentTracks[0].track.name + ' album cover'" 
-  /></div>
-        <h3 id="main-track-name">{{ recentTracks[0]?.track?.name }}</h3>  
+        <div class="album-cover" id="main-album-cover"><img *ngIf="selectedTrack.album?.images?.[0]?.url"
+            [src]="selectedTrack.album.images[0].url" [alt]="selectedTrack.name + ' album cover'" />
+        </div>
+        <h3 id="main-track-name">{{ selectedTrack.name }}</h3>
         <p class="played-time">Played at: {{ recentTracks[0]?.played_at | date: 'shortTime' }}</p>
       </div>
       <div id="selected-track-details" *ngIf="selectedTrack">
-        <div id="artist">By: {{ recentTracks[0]?.track?.artists?.[0]?.name }}</div>
-        <div id="album-name">Album: {{ recentTracks[0]?.track?.album?.name }}</div>
-        <div id="duration">Duration: {{ formatDuration(recentTracks[0]?.track?.duration_ms) }}</div>
-        <div id="popularity">Popularity: {{ popularityScale100to10(recentTracks[0]?.track?.popularity) }}/10</div>
+        <div id="artist">By: {{ selectedTrack.artists?.[0]?.name }}</div>
+        <div id="album-name">Album: {{ selectedTrack.album?.name }}</div>
+        <div id="duration">Duration: {{ formatDuration(selectedTrack.duration_ms) }}</div>
+        <div id="popularity">Popularity: {{ popularityScale100to10(selectedTrack.popularity) }}/10</div>
       </div>
     </div>
   </div>
@@ -132,16 +90,11 @@
     <div class="dashboard-card scrollable-card">
       <h3>Listening History</h3>
       <div class="scrollable-content" id="tracks-list">
-        <div class="track-item" 
-             *ngFor="let track of recentTracks; let i = index" 
-             [attr.data-index]="i + 1" 
-             (click)="onTrackClick(track?.track?.id)">
+        <div class="track-item" *ngFor="let track of recentTracks; let i = index" [attr.data-index]="i + 1"
+          (click)="onTrackClick(track?.track?.id)">
           <div class="small-album-cover">
-            <img *ngIf="track?.track?.album?.images?.length" 
-                 [src]="track?.track?.album?.images?.[0]?.url"
-                 [alt]="track?.track?.name + ' album cover'" 
-                 width="100" 
-                 (error)="$event.target.style.display='none'" />
+            <img *ngIf="track?.track?.album?.images?.length" [src]="track?.track?.album?.images?.[0]?.url"
+              [alt]="track?.track?.name + ' album cover'" width="100" (error)="$event.target.style.display='none'" />
             <div class="placeholder-small" *ngIf="!track?.track?.album?.images?.length">♪</div>
           </div>
           <div class="track-info">
@@ -155,13 +108,15 @@
 
     <!-- Empty Divs (Right side) -->
     <div class="dashboard-card-column">
-      <div class="dashboard-card empty-card small">
-        <h3>You can't get enough of</h3>
+      <div id="hooked-on">
+        <h3 style="align-items: center;">Hooked on</h3>
+        <img [src]="topByFreq?.image" alt="{{ topByFreq?.name }} album cover" class="top-track-image">
         <div class="top-track-card">
-          <img [src]="topByFreq?.image" alt="{{ topByFreq?.name }} album cover" class="top-track-image">
           <div class="top-track-info">
             <h4 class="track-name">{{ topByFreq?.name }}</h4>
             <p class="artist-name">{{ topByFreq?.artist }}</p>
+          </div>
+          <div class="top-track-info">
             <p class="play-count">Played {{ topByFreq?.count }} times in last 50</p>
           </div>
         </div>

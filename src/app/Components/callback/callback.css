@@ -1,4 +1,4 @@
-/* 
+/*  
 #MainContainer {
   min-height: 100vh;
   width: 100%;
@@ -16,10 +16,9 @@
     radial-gradient(circle at 50% 100%, rgba(70, 85, 110, 0.5) 0%, transparent 60%),
     radial-gradient(circle at 50% 100%, rgba(99, 102, 241, 0.4) 0%, transparent 70%),
     radial-gradient(circle at 50% 100%, rgba(181, 184, 208, 0.3) 0%, transparent 80%);
-}
+} */
 
-
-
+/*
 #Header {
   display: flex;
   flex-direction: row;
@@ -485,6 +484,7 @@
   /* background-color: #2d1b69; */
 }
 
+  
 /* Pill-shaped boxes */
 #selected-track-details > div {
   background: rgba(255, 255, 255, 0.58);
@@ -546,15 +546,31 @@
             display: flex;
             flex-direction: column;
             align-items: center;
-            justify-content: center;
+            justify-content: space-between;
             width: 40%;
+            padding-top: 20px;
         }
 
-        .now-playing-card-top{
-          /* background-color: antiquewhite; */
-          width: 100%;
+        .now-playing-card img{
+            height: 140px;
+          width: 140px;
+          border-radius: 20px;
+          border: 2px white solid;
         }
 
+        #current-track-data{
+          gap: 10pxpx;
+        } 
+
+        #current-track-name{
+          margin-bottom: 5px;
+        }
+
+        #current-artist{
+          margin-bottom: 5px;
+          color: #aaa;
+        }
+      
         .song-card {
             /* flex: 2; */
             display: flex;
@@ -577,12 +593,6 @@
             flex-direction: column;
         }
 
-        .dashboard-card-column {
-            flex: 1;
-            display: flex;
-            flex-direction: column;
-            gap: 20px;
-        }
 
         .dashboard-card.small {
             flex: 1;
@@ -698,26 +708,36 @@
             font-style: italic;
         }
 
-        .top-track-card {
+  .top-track-card {
   display: flex;
+  flex-direction: column;
   align-items: center;
-  background: rgba(255, 255, 255, 0.08);
-  padding: 10px;
-  border-radius: 50px;
-  margin-top: 10px;
+  
 }
 
 .top-track-image {
-  width: 50px;
-  height: 50px;
+  display: flex;
+  width: 100px;
+  height: 100px;
   border-radius: 8px;
-  object-fit: cover;
+  margin-left: calc(50% - 120px);
+  /* object-fit: cover; */
   margin-right: 10px;
+  align-items: center;
 }
 
 .top-track-info {
   display: flex;
   flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background: rgba(255, 255, 255, 0.08);
+  padding: 10px;
+  border-radius: 50px;
+  margin-top: 10px;
+  height: 60px;
+  width: 250px;
+
 }
 
 .track-name {
@@ -731,9 +751,38 @@
   margin: 2px 0;
 }
 
+.dashboard-card-column {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+            gap: 20px;
+            /* background-color: red; */
+              background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 20px;
+            padding: 30px;
+            color: white;
+            box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+            transition: all 0.3s ease;
+            overflow: hidden;
+        }
+
+#hooked-on{
+display: flex;
+flex-direction: column;
+justify-content: center;
+align-items: center;
+width: 100%;
+}
+
 .play-count {
   font-size: 12px;
   color: #aaa;
+  
 }
 
 

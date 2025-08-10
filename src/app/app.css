@@ -1,8 +1,12 @@
-html, body {
-  margin: 0;
-  padding: 0;
-  height: 100%;
-  width: 100%;
+#Navigation {
+  height: 300px;
+  width: 400px;
+  background-color: blueviolet;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 5; /* Lower the z-index to allow the button to be clickable */
+  pointer-events: none; /* Ensure it doesn't block interactions */
 }
 
 #MainDisplay {
@@ -12,7 +16,21 @@ html, body {
   left: 0;
   right: 0;
   overflow: auto;
+  pointer-events: auto;
 }
-* {
-  font-family: 'Comfortaa', cursive;
+
+app-navbar {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 10;
+  width: 100%; 
+  height: 100%;  
+  background: rgba(0,0,0,0.6);  
+  color: white;
+  pointer-events: auto; 
+}
+
+button {
+  z-index: 15; /* Ensure the button has the highest z-index */
 }

@@ -208,8 +208,9 @@ import { concat } from 'rxjs';
 export class Callback implements OnInit {
   recentTracks: any[] = [];
   topByFreq: any;
-  selectedTrack: any;
+  selectedTrack: any = null;
   currentSong: any;
+  currentSongData: any;
   token: string | null = null;
 
 
@@ -226,7 +227,9 @@ export class Callback implements OnInit {
       const accessToken = await this.spotifyService.getAccessToken(code);
       this.token = accessToken;
       this.recentTracks = await this.spotifyService.fetchRecentlyPlayed(this.token);
-      this.currentSong = await this.spotifyService.fetchCurrentlyPlaying(this.token);
+      this.currentSongData = await this.spotifyService.fetchCurrentlyPlaying(this.token);
+      this.topByFreq = this.getTopTrackByFrequency();
+
 
       if (!accessToken) {
         console.error("Failed to get access token. Check token exchange process.");
@@ -236,6 +239,13 @@ export class Callback implements OnInit {
       }
     }
 
+    if (this.currentSongData && this.currentSongData.item) {
+      this.currentSong = this.currentSongData.item;
+    } else if (this.recentTracks.length > 0) {
+      this.currentSong = this.recentTracks[0].track;
+    } else {
+      this.currentSong = null;
+    }
 
 
 
@@ -260,16 +270,11 @@ export class Callback implements OnInit {
 
     }
 
+    if (this.recentTracks.length > 0) {
+  this.onTrackClick(this.recentTracks[0].track.id);
+}
+
   }
-
-  getCurrentSongArtists(): string {
-  return this.currentSong?.item?.artists?.map((a: { name: any; }) => a.name).join(', ') || '';
-}
-
-getLastPlayedArtists(): string {
-  return this.recentTracks?.[0]?.track?.artists?.map((a: { name: any; }) => a.name).join(', ') || '';
-}
-
 
   formatDuration(ms: number): string {
     const totalSeconds = Math.floor(ms / 1000);
@@ -311,10 +316,21 @@ getLastPlayedArtists(): string {
   }
 
   onTrackClick(trackId: string) {
-    this.selectedTrack = {
+  const trackItem = this.recentTracks.find(item => item.track.id === trackId);
+  if (!trackItem) return;
 
-    }
-  }
+  const track = trackItem.track;
+  this.selectedTrack = {
+    name: track.name,
+    popularity: this.popularityScale100to10(track.popularity),
+    album: track.album,
+    duration_ms: track.duration_ms,
+    played_at: trackItem.played_at,
+    artists: track.artists
+  };
+}
+
+
 
 
 

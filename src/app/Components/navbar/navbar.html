@@ -1,1 +1,23 @@
-<p>navbar works!</p>
+<!-- <p>navbar works!</p> -->
+<div id="Header">
+    <div id="ProfielSection">
+      <div id="ProfileImage">
+        <img *ngIf="profile.images?.length" [src]="profile.images[0].url" />
+      </div>
+      <div id="ProfileInfo">
+        <p id="Name">{{ profile.display_name }}</p>
+        <p id="Country">{{ profile.country }}</p>
+      </div>
+    </div>
+
+  <!-- Dropdown Menu -->
+  <div id="DropdownMenu" class="dropdown-container" [class.visible]="isDropdownVisible">
+    <button class="dropdown-item" (click)="onMenuItemClick('Top Songs')">Top Songs</button>
+    <button class="dropdown-item" (click)="onMenuItemClick('Top Artists')">Top Artists</button>
+    <button class="dropdown-item" (click)="onMenuItemClick('Listening History')">Listening History</button>
+    <button class="dropdown-item" (click)="onMenuItemClick('Global')">Global</button>
+    <button class="dropdown-item" (click)="onMenuItemClick('Dashboard')">Dashboard</button>
+    <hr class="dropdown-divider">
+    <button class="dropdown-item logout" (click)="onMenuItemClick('Logout')">Logout</button>
+  </div>
+</div>
