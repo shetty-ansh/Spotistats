@@ -132,7 +132,7 @@ export class Login implements OnInit {
       params.append("client_id", clientId);
       params.append("response_type", "code");
       params.append("redirect_uri", "http://127.0.0.1:5173/callback");
-      params.append("scope", "user-read-private user-read-email user-top-read user-read-recently-played");
+      params.append("scope", "user-read-private user-read-email user-top-read user-read-recently-played user-read-currently-playing");
       params.append("code_challenge_method", "S256");
       params.append("code_challenge", challenge);
 

@@ -102,8 +102,102 @@
 //////////////////////////////////////////////////////////////////////////////////////
 
 
+// import { Component, OnInit } from '@angular/core';
+// import { SpotifyService } from '../../Services/spotify-service';
+
+// @Component({
+//   selector: 'app-callback',
+//   standalone: false,
+//   templateUrl: './callback.html',
+//   styleUrl: './callback.css'
+// })
+// export class Callback implements OnInit {
+//   recentTracks: any[] = [];
+//   topByFreq : any;
+//   selectedTrack: any;
+//   token: string | null = null;
+
+
+//   constructor(private spotifyService: SpotifyService) { }
+
+//   async ngOnInit() {
+//     const params = new URLSearchParams(window.location.search);
+//     const code = params.get("code");
+//     const hash = window.location.hash;
+//     const token = new URLSearchParams(hash.substring(1)).get('access_token');
+//     console.log(this.recentTracks)
+
+//     if (code) {
+//       const accessToken = await this.spotifyService.getAccessToken(code);
+//       this.token = accessToken;
+//       this.recentTracks = await this.spotifyService.fetchRecentlyPlayed(this.token);
+//     }
+
+//     if (token) {
+//       localStorage.setItem('access_token', token);
+//       this.spotifyService.setAccessToken(token);
+//       this.token = token;
+//       this.recentTracks = await this.spotifyService.fetchRecentlyPlayed(this.token);
+//       this.topByFreq = this.getTopTrackByFrequency();
+//     }
+//   }
+
+//     formatDuration(ms: number): string {
+//     const totalSeconds = Math.floor(ms / 1000);
+//     const minutes = Math.floor(totalSeconds / 60);
+//     const seconds = totalSeconds % 60;
+//     return `${minutes}:${seconds < 10 ? '0' : ''}${seconds}`;
+//   }
+
+//   popularityScale100to10(popularity: number): number {
+//     return Math.round(popularity / 10); 
+//   }
+
+// getTopTrackByFrequency() {
+//   if (!this.recentTracks.length) return null;
+
+//   const counts: { 
+//     [id: string]: { 
+//       name: string; 
+//       artist: string; 
+//       image: string; 
+//       count: number; 
+//     } 
+//   } = {};
+
+//   this.recentTracks.forEach(item => {
+//     const id = item.track.id;
+//     if (!counts[id]) {
+//       counts[id] = {
+//         name: item.track.name,
+//         artist: item.track.artists[0]?.name || 'Unknown Artist',
+//         image: item.track.album?.images?.[0]?.url || '',
+//         count: 0
+//       };
+//     }
+//     counts[id].count++;
+//   });
+
+
+//   return Object.values(counts).reduce((max, curr) => curr.count > max.count ? curr : max);
+// }
+
+// onTrackClick(trackId: string){
+//   this.selectedTrack = {
+
+//   }
+// }
+
+// }
+
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
 import { Component, OnInit } from '@angular/core';
 import { SpotifyService } from '../../Services/spotify-service';
+import { concat } from 'rxjs';
 
 @Component({
   selector: 'app-callback',
@@ -113,7 +207,11 @@ import { SpotifyService } from '../../Services/spotify-service';
 })
 export class Callback implements OnInit {
   recentTracks: any[] = [];
+  topByFreq: any;
+  selectedTrack: any;
+  currentSong: any;
   token: string | null = null;
+
 
   constructor(private spotifyService: SpotifyService) { }
 
@@ -128,104 +226,96 @@ export class Callback implements OnInit {
       const accessToken = await this.spotifyService.getAccessToken(code);
       this.token = accessToken;
       this.recentTracks = await this.spotifyService.fetchRecentlyPlayed(this.token);
+      this.currentSong = await this.spotifyService.fetchCurrentlyPlaying(this.token);
+
+      if (!accessToken) {
+        console.error("Failed to get access token. Check token exchange process.");
+        return;
+      } else {
+        console.log(`Access Token - ${accessToken}`)
+      }
     }
+
+
+
 
     if (token) {
       localStorage.setItem('access_token', token);
       this.spotifyService.setAccessToken(token);
       this.token = token;
       this.recentTracks = await this.spotifyService.fetchRecentlyPlayed(this.token);
+      this.currentSong = await this.spotifyService.fetchCurrentlyPlaying(this.token);
+      this.topByFreq = this.getTopTrackByFrequency();
     }
+
+
+    if (!this.recentTracks) {
+      console.log("Didn't fetch recent tracks")
+    }
+    else {
+      console.log("ABABABAB")
+      console.log(this.recentTracks)
+      console.log('Code from URL:', code);
+      console.log('Token from hash:', token);
+
+    }
+
   }
+
+  getCurrentSongArtists(): string {
+  return this.currentSong?.item?.artists?.map((a: { name: any; }) => a.name).join(', ') || '';
+}
+
+getLastPlayedArtists(): string {
+  return this.recentTracks?.[0]?.track?.artists?.map((a: { name: any; }) => a.name).join(', ') || '';
 }
 
 
+  formatDuration(ms: number): string {
+    const totalSeconds = Math.floor(ms / 1000);
+    const minutes = Math.floor(totalSeconds / 60);
+    const seconds = totalSeconds % 60;
+    return `${minutes}:${seconds < 10 ? '0' : ''}${seconds}`;
+  }
 
-///////////////////////////////////////////////////////////////////////////////////////////////////////////
+  popularityScale100to10(popularity: number): number {
+    return Math.round(popularity / 10);
+  }
 
-// import { Component, OnInit } from '@angular/core';
-// import { SpotifyService } from '../../Services/spotify-service';
+  getTopTrackByFrequency() {
+    if (!this.recentTracks.length) return null;
 
-// @Component({
-//   selector: 'app-callback',
-//   templateUrl: './callback.component.html',
-//   styleUrls: ['./callback.component.css']
-// })
-// export class Callback implements OnInit {
-//   recentTracks: any[] = [];
-//   token: string | null = null;
-//   isLoading: boolean = true;
-//   error: string | null = null;
+    const counts: {
+      [id: string]: {
+        name: string;
+        artist: string;
+        image: string;
+        count: number;
+      }
+    } = {};
 
-//   constructor(private spotifyService: SpotifyService) {}
+    this.recentTracks.forEach(item => {
+      const id = item.track.id;
+      if (!counts[id]) {
+        counts[id] = {
+          name: item.track.name,
+          artist: item.track.artists[0]?.name || 'Unknown Artist',
+          image: item.track.album?.images?.[0]?.url || '',
+          count: 0
+        };
+      }
+      counts[id].count++;
+    });
 
-//   async ngOnInit() {
-//     try {
-//       const params = new URLSearchParams(window.location.search);
-//       const code = params.get("code");
-//       const hash = window.location.hash;
-//       const token = new URLSearchParams(hash.substring(1)).get('access_token');
+    return Object.values(counts).reduce((max, curr) => curr.count > max.count ? curr : max);
+  }
 
-//       if (code) {
-//         const accessToken = await this.spotifyService.getAccessToken(code);
-//         this.token = accessToken;
-//         await this.loadRecentTracks();
-//       }
+  onTrackClick(trackId: string) {
+    this.selectedTrack = {
 
-//       if (token) {
-//         localStorage.setItem('access_token', token);
-//         this.spotifyService.setAccessToken(token);
-//         this.token = token;
-//         await this.loadRecentTracks();
-//       }
+    }
+  }
 
-//       if (!code && !token) {
-//         this.error = 'No authentication token found';
-//         this.isLoading = false;
-//       }
-//     } catch (error) {
-//       console.error('Error initializing component:', error);
-//       this.error = 'Failed to load Spotify data';
-//       this.isLoading = false;
-//     }
-//   }
 
-//   private async loadRecentTracks() {
-//     try {
-//       if (!this.token) throw new Error('No token available');
-//       this.isLoading = true;
-//       this.recentTracks = await this.spotifyService.fetchRecentlyPlayed(this.token);
-//       console.log('Loaded tracks:', this.recentTracks);
-//     } catch (error) {
-//       console.error('Error loading recent tracks:', error);
-//       this.error = 'Failed to load recent tracks';
-//     } finally {
-//       this.isLoading = false;
-//     }
-//   }
 
-//   get firstTrack() {
-//     return this.recentTracks && this.recentTracks.length > 0 ? this.recentTracks[0] : null;
-//   }
-
-//   get scrollableTracks() {
-//     if (!this.recentTracks || this.recentTracks.length <= 1) return [];
-//     return this.recentTracks.slice(1, 50);
-//   }
-
-//   getAlbumImageUrl(track: any, sizeIndex: number = 0): string {
-//     return track?.track?.album?.images?.[sizeIndex]?.url || '';
-//   }
-
-//   getTrackName(track: any): string {
-//     return track?.track?.name || 'Unknown Track';
-//   }
-
-//   getArtistName(track: any): string {
-//     return track?.track?.artists?.[0]?.name || 'Unknown Artist';
-//   }
-
-//   getPlayedAt(track: any): string {
-//     return track?.played_at ? new Date(track.played_at).toLocaleTimeString() : '';
-//   }
-// }
+}

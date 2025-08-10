@@ -53,22 +53,78 @@ export class SpotifyService {
   setAccessToken(token: string) {
   this.accessToken = token;
 }
-async fetchCurrentlyPlaying(token: string): Promise<any> {
-  const result = await fetch("https://api.spotify.com/v1/me/player/currently-playing", {
-    headers: { Authorization: `Bearer ${token}` }
-  });
-  if (result.status === 204) return null;
-  return await result.json();
+
+async fetchRecentlyPlayed(token?: string): Promise<any[]> {
+  const useToken = token || this.accessToken;
+
+  if (!useToken) {
+    console.error("No access token available for fetchRecentlyPlayed");
+    return [];
+  }
+
+  try {
+    const result = await fetch(
+      "https://api.spotify.com/v1/me/player/recently-played?limit=50",
+      {
+        headers: { Authorization: `Bearer ${useToken}` }
+      }
+    );
+
+    const data = await result.json();
+    console.log("Recently played response:", data);
+
+    if (data.error) {
+      console.error("Spotify API error:", data.error);
+      return [];
+    }
+
+    return data.items || [];
+  } catch (err) {
+    console.error("Error fetching recently played tracks:", err);
+    return [];
+  }
 }
 
-async fetchRecentlyPlayed(token: string): Promise<any[]> {
-  const result = await fetch("https://api.spotify.com/v1/me/player/recently-played?limit=50", {
-    headers: { Authorization: `Bearer ${token}` }
-  });
-  const data = await result.json();
-  return data.items || [];
+async fetchCurrentlyPlaying(token?: string): Promise<any | null> {
+  const useToken = token || this.accessToken;
+
+  if (!useToken) {
+    console.error("No access token");
+    return null;
+  }
+
+  try {
+    const result = await fetch(
+      "https://api.spotify.com/v1/me/player/currently-playing",
+      {
+        headers: { Authorization: `Bearer ${useToken}` },
+      }
+    );
+
+    if (result.status === 204) {
+      // No track currently playing
+      return null;
+    }
+
+    if (!result.ok) {
+      console.error(`Error ${result.status}: ${result.statusText}`);
+      return null;
+    }
+
+    return await result.json();
+  } catch (error) {
+    console.error("Error while fetching currently playing track", error);
+    return null;
+  }
 }
 
 
-
 }
+
+  // async fetchCurrentlyPlaying(token: string): Promise<any> {
+  //   const result = await fetch("https://api.spotify.com/v1/me/player/currently-playing", {
+  //     headers: { Authorization: `Bearer ${token}` }
+  //   });
+  //   if (result.status === 204) return null;
+  //   return await result.json();
+  // }

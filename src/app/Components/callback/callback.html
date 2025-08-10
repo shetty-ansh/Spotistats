@@ -97,57 +97,58 @@
 </div>  -->
 
 
-
 <div class="dashboard-container">
   <!-- Top row -->
-  <div class="dashboard-row">
+  <div class="dashboard-row top">
     <!-- Empty Div (Top Left) -->
-    <div class="dashboard-card empty-card">
-      <h3>Empty Div</h3>
-      <p>Total Tracks: {{ recentTracks.length }}</p>
+    <div class="dashboard-card now-playing-card">
+      <div class="now-playing-card-top">Currently Playing</div>
+      <!-- <If no song is cirrently playiong, display the last played track here> -->
     </div>
 
-    <!-- First Song in Recently Played -->
-    <div class="dashboard-card song-card" *ngIf="recentTracks.length > 0">
-      <div id="first-track">
-        <div
-          class="album-cover"
-          id="main-album-cover"
-          [style.background-image]="'url(' + recentTracks[0].track.album.images[0].url + ')'"
-        ></div>
-        <h3 id="main-track-name">{{ recentTracks[0].track.name }}</h3>
-        <p id="main-artist-name">{{ recentTracks[0].track.artists[0].name }}</p>
-        <p class="played-time">Played at: {{ recentTracks[0].played_at | date: 'shortTime' }}</p>
+    <!-- Selected Song in Recently Played -->
+    <div class="dashboard-card song-card" *ngIf="(recentTracks?.length || 0) > 0">
+      <div id="selected-track">
+        <div class="album-cover" id="main-album-cover" ><img 
+    *ngIf="recentTracks?.[0]?.track?.album?.images?.[0]?.url" 
+    [src]="recentTracks[0].track.album.images[0].url" 
+    [alt]="recentTracks[0].track.name + ' album cover'" 
+  /></div>
+        <h3 id="main-track-name">{{ recentTracks[0]?.track?.name }}</h3>  
+        <p class="played-time">Played at: {{ recentTracks[0]?.played_at | date: 'shortTime' }}</p>
+      </div>
+      <div id="selected-track-details" *ngIf="selectedTrack">
+        <div id="artist">By: {{ recentTracks[0]?.track?.artists?.[0]?.name }}</div>
+        <div id="album-name">Album: {{ recentTracks[0]?.track?.album?.name }}</div>
+        <div id="duration">Duration: {{ formatDuration(recentTracks[0]?.track?.duration_ms) }}</div>
+        <div id="popularity">Popularity: {{ popularityScale100to10(recentTracks[0]?.track?.popularity) }}/10</div>
       </div>
     </div>
   </div>
 
   <!-- Bottom row -->
-  <div class="dashboard-row">
+  <div class="dashboard-row bottom">
     <!-- Scrollable Past 50 Songs -->
     <div class="dashboard-card scrollable-card">
       <h3>Listening History</h3>
       <div class="scrollable-content" id="tracks-list">
-        <div
-          class="track-item"
-          *ngFor="let track of recentTracks; let i = index"
-          [attr.data-index]="i + 1"
-        >
+        <div class="track-item" 
+             *ngFor="let track of recentTracks; let i = index" 
+             [attr.data-index]="i + 1" 
+             (click)="onTrackClick(track?.track?.id)">
           <div class="small-album-cover">
-            <img
-              *ngIf="track.track?.album?.images?.length"
-              [src]="track.track.album.images[0].url"
-              [alt]="track.track.name + ' album cover'"
-              width="100"
-              (error)="$event.target.style.display='none'"
-            />
-            <div class="placeholder-small" *ngIf="!track.track?.album?.images?.length">♪</div>
+            <img *ngIf="track?.track?.album?.images?.length" 
+                 [src]="track?.track?.album?.images?.[0]?.url"
+                 [alt]="track?.track?.name + ' album cover'" 
+                 width="100" 
+                 (error)="$event.target.style.display='none'" />
+            <div class="placeholder-small" *ngIf="!track?.track?.album?.images?.length">♪</div>
           </div>
           <div class="track-info">
-            <span class="track-name" style="margin-bottom: 5px;">{{ track.track.name }}</span>
-            <span class="artist-name">{{ track.track.artists[0]?.name }}</span>
+            <span class="track-name" style="margin-bottom: 5px;">{{ track?.track?.name }}</span>
+            <span class="artist-name">{{ track?.track?.artists?.[0]?.name }}</span>
           </div>
-          <span class="played-time">{{ track.played_at | date: 'shortTime' }}</span>
+          <span class="played-time">{{ track?.played_at | date: 'shortTime' }}</span>
         </div>
       </div>
     </div>
@@ -155,12 +156,15 @@
     <!-- Empty Divs (Right side) -->
     <div class="dashboard-card-column">
       <div class="dashboard-card empty-card small">
-        <h3>Empty Div</h3>
-        <p>Authenticated ✓</p>
-      </div>
-      <div class="dashboard-card empty-card small">
-        <h3>Empty Div</h3>
-        <p>Ready to expand</p>
+        <h3>You can't get enough of</h3>
+        <div class="top-track-card">
+          <img [src]="topByFreq?.image" alt="{{ topByFreq?.name }} album cover" class="top-track-image">
+          <div class="top-track-info">
+            <h4 class="track-name">{{ topByFreq?.name }}</h4>
+            <p class="artist-name">{{ topByFreq?.artist }}</p>
+            <p class="play-count">Played {{ topByFreq?.count }} times in last 50</p>
+          </div>
+        </div>
       </div>
     </div>
   </div>
