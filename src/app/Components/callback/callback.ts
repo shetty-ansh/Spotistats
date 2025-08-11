@@ -10,7 +10,9 @@ import { AfterViewInit, ElementRef, QueryList, ViewChildren } from '@angular/cor
 })
 export class Callback implements OnInit {
   profile: any = null;
-  topTracks: boolean = true
+  topTracks: boolean = false
+  topArtists: boolean = true
+  listeningHistory: boolean = false
 
   topTracksShort: any[] = [];
   topTracksMedium: any[] = [];
@@ -24,6 +26,7 @@ export class Callback implements OnInit {
   token: string | null = null;
 
   isToggled = false;
+  isArtistsToggled = false;
   currentIndex: number = 0;
 
   @ViewChildren('scrollItem') items!: QueryList<ElementRef>;
@@ -128,6 +131,24 @@ export class Callback implements OnInit {
     return result;
   }
 
+    toggleArtistSwitch() {
+    this.isArtistsToggled = !this.isArtistsToggled;
+    this.currentIndex = 0;
+  }
+
+  visibleArtists() {
+    const artists = this.isArtistsToggled ? this.topArtistsMedium : this.topArtistsShort;
+    const start = this.currentIndex - 2;
+    const result = [];
+
+    for (let i = start; i < start + 5; i++) {
+      const index = (i + artists.length) % artists.length;
+      result.push(artists[index]);
+    }
+
+    return result;
+  }
+
     getTopTrackByFrequency() {
     if (!this.recentTracks.length) return null;
 
@@ -177,6 +198,11 @@ export class Callback implements OnInit {
     const seconds = totalSeconds % 60;
     return `${minutes}:${seconds < 10 ? '0' : ''}${seconds}`;
   }
+
+  toTitleCase(str: string): string {
+  return str.replace(/\b\w/g, char => char.toUpperCase());
+}
+
 
   popularityScale100to10(popularity: number): number {
     return Math.round(popularity / 10);
