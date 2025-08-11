@@ -15,17 +15,14 @@ export class Navbar implements OnInit {
   constructor(private spotifyService: SpotifyService) {}
 
   async ngOnInit() {
-
     const params = new URLSearchParams(window.location.search);
     const code = params.get('code');
     const hash = window.location.hash;
     const token = new URLSearchParams(hash.substring(1)).get('access_token');
 
-
     if (code) {
       const accessToken = await this.spotifyService.getAccessToken(code);
       this.token = accessToken;
-      
 
       if (this.token) {
         this.profile = await this.spotifyService.fetchProfile(this.token);
@@ -42,6 +39,7 @@ export class Navbar implements OnInit {
     }
   }
 
+  // Dropdown show/hide methods
   showDropdown() {
     this.isDropdownVisible = true;
   }
