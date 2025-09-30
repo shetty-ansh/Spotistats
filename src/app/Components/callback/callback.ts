@@ -10,8 +10,8 @@ import { AfterViewInit, ElementRef, QueryList, ViewChildren } from '@angular/cor
 })
 export class Callback implements OnInit {
   profile: any = null;
-  topTracks: boolean = false
-  topArtists: boolean = true
+  topTracks: boolean = true
+  topArtists: boolean = false
   listeningHistory: boolean = false
 
   topTracksShort: any[] = [];

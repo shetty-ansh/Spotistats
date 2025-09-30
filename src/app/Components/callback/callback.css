@@ -833,3 +833,189 @@ width: 100%;
                 padding: 20px;
             }
         } 
+
+
+/* Mobile Responsive - Carousel */
+@media (max-width: 968px) {
+  .carousel-display {
+    height: calc(100vh - 80px);
+    padding: 20px 10px;
+  }
+
+  #ToggleContainer {
+    height: auto;
+    padding: 20px 0;
+    margin-bottom: 20px;
+  }
+
+  .switch-container {
+    max-height: 45px;
+  }
+
+  .switch-option {
+    padding: 10px 20px;
+    font-size: 13px;
+    min-width: 90px;
+  }
+
+  #carousel-container {
+    flex-direction: column;
+    height: auto;
+  }
+
+  .nav-button {
+    width: 100%;
+    height: 60px;
+    font-size: 2rem;
+    padding: 10px;
+  }
+
+  .nav-button.left {
+    order: 2;
+  }
+
+  .nav-button.right {
+    order: 3;
+  }
+
+  .carousel-track {
+    order: 1;
+    width: 100%;
+    padding: 20px 0;
+    overflow-x: auto;
+    overflow-y: hidden;
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+  }
+
+  .carousel-track::-webkit-scrollbar {
+    display: none;
+  }
+
+  .carousel-card {
+    width: 200px;
+    height: 320px;
+    scroll-snap-align: center;
+  }
+
+  .carousel-card.center {
+    transform: scale(1.05);
+  }
+
+  .carousel-card.left,
+  .carousel-card.right {
+    transform: scale(0.9);
+    opacity: 0.7;
+  }
+
+  .carousel-card.far-left,
+  .carousel-card.far-right {
+    transform: scale(0.85);
+    opacity: 0.5;
+  }
+
+  .track-badge {
+    height: 25px;
+    width: 28px;
+    font-size: 20px;
+  }
+
+  .track-info p {
+    font-size: 14px;
+  }
+}
+
+@media (max-width: 480px) {
+  .carousel-display {
+    height: calc(100vh - 60px);
+    padding: 15px 5px;
+  }
+
+  #ToggleContainer {
+    padding: 15px 0;
+    margin-bottom: 15px;
+  }
+
+  .switch-container {
+    max-height: 40px;
+  }
+
+  .switch-option {
+    padding: 8px 16px;
+    font-size: 12px;
+    min-width: 80px;
+  }
+
+  .nav-button {
+    height: 50px;
+    font-size: 1.5rem;
+  }
+
+  .carousel-track {
+    padding: 15px 0;
+    gap: 8px;
+  }
+
+  .carousel-card {
+    width: 180px;
+    height: 280px;
+    border-radius: 30px;
+    padding: 6px;
+  }
+
+  #Image {
+    border-radius: 28px;
+  }
+
+  #Image img {
+    border-radius: 25px;
+  }
+
+  .track-badge {
+    height: 22px;
+    width: 25px;
+    font-size: 18px;
+    bottom: 8px;
+    left: 8px;
+  }
+
+  .track-info {
+    padding: 0.3rem;
+  }
+
+  .track-info p {
+    font-size: 12px;
+  }
+
+  #TrackName {
+    font-weight: 600;
+  }
+
+  #ArtistName {
+    font-size: 11px;
+    opacity: 0.8;
+  }
+}
+
+/* Tablet landscape */
+@media (min-width: 481px) and (max-width: 968px) {
+  .carousel-card {
+    width: 220px;
+    height: 340px;
+  }
+}
+
+/* Very small devices */
+@media (max-width: 360px) {
+  .carousel-card {
+    width: 160px;
+    height: 260px;
+  }
+
+  .switch-option {
+    padding: 6px 12px;
+    font-size: 11px;
+    min-width: 70px;
+  }
+}

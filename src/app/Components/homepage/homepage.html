@@ -1,42 +1,65 @@
-<!-- 
-<div class="background-wrapper">
-  <div class="arctic-glow">
-<div id="Header">
-  <div id="SpotifyLogo"></div>
-  <a class="Socials">Instagram</a>
-  <a class="Socials">Github</a>
-</div>
-<div id="HeroText">
-  <h1>Spotistats</h1>
-
-</div>
-  <div class="btn-container">
-    <button routerLink="/login" class="nav-button">Jump In</button>
-  </div>
-
-  </div>
-</div> -->
-
-<div class="background-wrapper">
-  <div class="arctic-glow">
-    <div id="Header">
-      <div id="SpotifyLogo"></div>
-      
-    </div>
-
-    <div id="HeroText">
-      <h1>Spotistats</h1>
-    </div>
-
-    <div class="btn-container">
-      <button routerLink="/login" class="nav-button">Jump In</button>
-    </div>
-    <div id="Footer">
-      <div style="margin-bottom: 50px; font-size: 20px; font-family: 'Comfortaa', cursive;">Ansh Shetty</div>
-      <div class="social-links">
-        <a href="https://github.com/shetty-ansh" class="Socials"><i class="fa-brands fa-github fa-2xl"></i></a>
-        <a href="https://www.linkedin.com/in/ansh-shetty/" class="Socials"><i class="fa-brands fa-linkedin fa-2xl"></i></a>
+<!-- <div class="main-bg">
+  <div class="inner-container">
+    <div id="spotify-illustration">
+      <img src="/assets/spotify-illustration.jpg" alt="Spotify Illustration">
+    </div>  
+    <div id="spotistats-hero">
+      <h1>स्पॉटिस्टैट्स</h1>
+      <div class="btn-container">
+        <button routerLink="/login" class="nav-button">Jump In</button>
       </div>
     </div>
   </div>
+</div> -->
+
+<div class="container">
+  <!-- Hero Section -->
+  <section class="hero">
+    <div class="hero-text">
+      <!-- <h1>स्पॉटिस्टैट्स</h1> -->
+       <h1>SPOTISTATS</h1>
+      <p>Your music stats visualized. Track trends, discover patterns.</p>
+      <button class="cta-btn" routerLink="/login">Jump In</button>
+    </div>
+    <div class="hero-image">
+      <img src="/assets/spotify-illustration.jpg" alt="Spotify Illustration">
+    </div>
+  </section>
+
+  <!-- Features Section -->
+  <section class="features">
+    <div class="features-grid">
+      <div class="feature">
+        <i class="fas fa-chart-bar feature-icon"></i>
+        <h3>Track Stats</h3>
+        <p>View your top artists, tracks, and genres</p>
+      </div>
+      <div class="feature">
+        <i class="fas fa-history feature-icon"></i>
+        <h3>Time Ranges</h3>
+        <p>Analyze listening over different periods</p>
+      </div>
+      <div class="feature">
+        <i class="fas fa-compass feature-icon"></i>
+        <h3>Discover</h3>
+        <p>Find patterns in your music taste</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="footer-content">
+      <h4>Developed By</h4>
+      <div class="developer-name">Ansh Shetty</div>
+      <div class="social-links">
+        <a href="https://github.com/shetty-ansh" target="_blank" rel="noopener noreferrer">
+          <i class="fa-brands fa-github fa-2xl"></i>
+        </a>
+        <a href="https://www.linkedin.com/in/ansh-shetty/" target="_blank" rel="noopener noreferrer">
+          <i class="fa-brands fa-linkedin fa-2xl"></i>
+        </a>
+      </div>
+    </div>
+  </footer>
 </div>
