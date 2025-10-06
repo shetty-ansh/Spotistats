@@ -1,0 +1,649 @@
+/* Reset & Base Styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  
+  /* Dashboard Container */
+  .dashboard-display {
+    position: relative;
+    min-height: 100vh;
+    width: 100%;
+    background-color: #1c1917;
+    overflow: hidden;
+    padding: 10px 20px; /* reduced overall padding */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  }
+  
+  .dashboard-display::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    background-image: radial-gradient(
+      circle at 50% 50%,
+      rgba(220, 38, 38, 0.2) 0%,
+      rgba(220, 38, 38, 0.12) 25%,
+      rgba(220, 38, 38, 0.06) 35%,
+      transparent 50%
+    );
+    pointer-events: none;
+  }
+  
+  .dashboard-display > * {
+    position: relative;
+    z-index: 1;
+  }
+  
+  .dashboard-display h1 {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 64px;
+    padding: 16px;
+    padding-left: 50px;
+    color: white;
+    font-size: clamp(1.5rem, 4vw, 2.5rem);
+  }
+  
+  #dashContainer {
+    height: max-content;
+    width: 100%;
+    max-width: 1400px;
+    padding-top: 20px;
+  }
+  
+  /* Dashboard Rows */
+  .dashboard-row {
+    display: flex;
+    gap: 12px;
+    margin-bottom: 12px;
+    width: 100%;
+  }
+  
+  .dashboard-row.top { min-height: 300px; }
+  
+  .dashboard-row.bottom { min-height: 320px; }
+  
+  /* Dashboard Cards */
+  .dashboard-card {
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 20px;
+    padding: 18px;
+    color: white;
+    box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+    transition: all 0.3s ease;
+    overflow: hidden;
+  }
+  
+  .dashboard-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 12px 40px 0 rgba(31, 38, 135, 0.5);
+  }
+  
+  /* Now Playing Card */
+  .now-playing-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    flex: 0 0 40%;
+    padding-top: 8px;
+  }
+  
+  .now-playing-card-top {
+    font-size: 1rem;
+    opacity: 0.8;
+    margin-bottom: 15px;
+  }
+  
+  #current-track-cover img {
+    height: 120px;
+    width: 120px;
+    border-radius: 20px;
+    border: 2px white solid;
+    object-fit: cover;
+  }
+  
+  #current-track-data {
+    text-align: center;
+    margin-top: 8px;
+  }
+  
+  #current-track-name {
+    margin-bottom: 5px;
+    font-weight: 600;
+    font-size: 1.1rem;
+  }
+  
+  #current-artist {
+    margin-bottom: 5px;
+    color: #aaa;
+    font-size: 0.95rem;
+  }
+  
+  /* Song Card */
+  .song-card {
+    flex: 1;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 12px;
+  }
+  
+  #selected-track {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    min-width: 150px;
+  }
+  
+  .album-cover {
+    width: 110px;
+    height: 110px;
+    border-radius: 12px;
+    margin-bottom: 10px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+    background: rgba(255, 255, 255, 0.1);
+    overflow: hidden;
+  }
+  
+  .album-cover img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  
+  #main-track-name {
+    font-size: 1.1rem;
+    font-weight: 600;
+    margin-bottom: 2px;
+  }
+  
+  .played-time {
+    opacity: 0.7;
+    font-size: 0.85rem;
+  }
+  
+  /* Selected Track Details */
+  #selected-track-details {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 8px;
+    flex: 1;
+    padding: 0 10px;
+    align-content: center;
+  }
+  
+  #selected-track-details > div {
+    background: rgba(255, 255, 255, 0.164);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    color: white;
+    padding: 8px 12px;
+    height: 50px;
+    border-radius: 50px;
+    font-size: 0.9rem;
+    font-weight: 500;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    overflow: hidden;
+    white-space: nowrap;
+    position: relative;
+    transition: transform 0.2s ease;
+  }
+  
+  #selected-track-details > div span {
+    display: inline-block;
+  }
+  
+  #selected-track-details > div.marquee span {
+    padding-left: 100%;
+    animation: marquee 10s linear infinite;
+  }
+  
+  @keyframes marquee {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(-100%); }
+  }
+  
+  #selected-track-details > div:hover {
+    transform: scale(1.05);
+  }
+  
+  /* Scrollable Card */
+  .scrollable-card {
+    flex: 2;
+    display: flex;
+    flex-direction: column;
+    padding: 12px;
+    max-height: 360px;
+    height: 360px;
+  }
+  
+  .card-title {
+    margin: 0 0 15px 10px;
+    font-size: 1.1rem;
+    font-weight: 600;
+    opacity: 0.9;
+    flex-shrink: 0;
+  }
+  
+  .scrollable-content {
+    flex: 1;
+    overflow-y: auto;
+    padding-right: 10px;
+    min-height: 0;
+  }
+  
+  .scrollable-content::-webkit-scrollbar {
+    width: 6px;
+  }
+  
+  .scrollable-content::-webkit-scrollbar-track {
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 3px;
+  }
+  
+  .scrollable-content::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, 0.3);
+    border-radius: 3px;
+  }
+  
+  .scrollable-content::-webkit-scrollbar-thumb:hover {
+    background: rgba(255, 255, 255, 0.5);
+  }
+  
+  /* Track Items */
+  .track-item {
+    display: flex;
+    align-items: center;
+    padding: 10px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    gap: 15px;
+    margin-bottom: 5px;
+    cursor: pointer;
+    transition: background 0.2s ease;
+  }
+  
+  .track-item:hover {
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 10px;
+  }
+  
+  .track-item:last-child {
+    border-bottom: none;
+  }
+  
+  .small-album-cover {
+    width: 50px;
+    height: 50px;
+    border-radius: 6px;
+    background: rgba(255, 255, 255, 0.1);
+    overflow: hidden;
+    flex-shrink: 0;
+  }
+  
+  .small-album-cover img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  
+  .placeholder-small {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+  }
+  
+  .track-info {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    min-width: 0;
+    gap: 3px;
+  }
+  
+  .track-name {
+    font-weight: 600;
+    font-size: 14px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  
+  .artist-name {
+    font-size: 12px;
+    opacity: 0.7;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  
+  /* Dashboard Card Column (Hooked On) */
+  .dashboard-card-column {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 20px;
+    padding: 30px;
+    color: white;
+    box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+    transition: all 0.3s ease;
+  }
+  
+  #hooked-on {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    gap: 15px;
+  }
+  
+  #hooked-on h3 {
+    margin: 0;
+    font-size: 1.2rem;
+    font-weight: 600;
+  }
+  
+  .top-track-image {
+    width: 120px;
+    height: 120px;
+    border-radius: 12px;
+    object-fit: cover;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+  }
+  
+  .top-track-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    gap: 10px;
+  }
+  
+  .top-track-info {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background: rgba(255, 255, 255, 0.08);
+    padding: 10px 20px;
+    border-radius: 50px;
+    width: 100%;
+    max-width: 280px;
+    min-height: 60px;
+  }
+  
+  .top-track-info h4 {
+    margin: 0;
+    font-size: 14px;
+    font-weight: 600;
+  }
+  
+  .top-track-info p {
+    margin: 2px 0 0 0;
+    font-size: 12px;
+    opacity: 0.7;
+  }
+  
+  .play-count {
+    font-size: 12px;
+    color: #aaa;
+  }
+  
+  /* Tablet Styles (768px - 1024px) */
+  @media (max-width: 1024px) {
+    .dashboard-display {
+      padding: 40px 30px;
+    }
+  
+    #dashContainer {
+      width: 100%;
+    }
+  
+    .dashboard-row {
+      gap: 15px;
+    }
+  
+    #selected-track-details {
+      padding: 0 10px;
+    }
+  }
+  
+  /* Mobile Styles (max-width: 768px) */
+  @media (max-width: 768px) {
+    .dashboard-display {
+      padding: 30px 15px;
+    }
+  
+    .dashboard-display h1 {
+      height: 60px;
+      padding: 20px;
+      margin-bottom: 10px;
+    }
+  
+    .dashboard-row {
+      flex-direction: column;
+      gap: 15px;
+      margin-bottom: 15px;
+    }
+  
+    .dashboard-row.top,
+    .dashboard-row.bottom {
+      min-height: auto;
+    }
+  
+    /* Now Playing Card - Mobile */
+    .now-playing-card {
+      flex: 1;
+      width: 100%;
+    }
+  
+    /* Song Card - Mobile */
+    .song-card {
+      flex-direction: column;
+      width: 100%;
+      text-align: center;
+    }
+  
+    #selected-track {
+      width: 100%;
+    }
+  
+    #selected-track-details {
+      grid-template-columns: 1fr;
+      padding: 20px 10px;
+      width: 100%;
+      max-width: 100%;
+    }
+  
+    #selected-track-details > div {
+      justify-content: center;
+      width: 100%;
+    }
+  
+    /* Scrollable Card - Mobile */
+    .scrollable-card {
+      height: auto;
+      max-height: 400px;
+      min-height: 300px;
+    }
+  
+    /* Dashboard Card Column - Mobile */
+    .dashboard-card-column {
+      width: 100%;
+    }
+  
+    #hooked-on {
+      gap: 10px;
+    }
+  
+    .top-track-image {
+      width: 100px;
+      height: 100px;
+    }
+  }
+  
+  /* Small Mobile Styles (max-width: 480px) */
+  @media (max-width: 480px) {
+    .dashboard-display {
+      padding: 20px 10px;
+    }
+  
+    .dashboard-display h1 {
+      height: 50px;
+      padding: 15px;
+      font-size: 1.3rem;
+    }
+  
+    .dashboard-card {
+      padding: 20px 15px;
+      border-radius: 15px;
+    }
+  
+    #current-track-cover img {
+      height: 100px;
+      width: 100px;
+    }
+  
+    #current-track-name {
+      font-size: 1rem;
+    }
+  
+    #current-artist {
+      font-size: 0.85rem;
+    }
+  
+    .album-cover {
+      width: 100px;
+      height: 100px;
+    }
+  
+    #main-track-name {
+      font-size: 1rem;
+    }
+  
+    #selected-track-details > div {
+      height: 50px;
+      font-size: 0.85rem;
+      padding: 8px 12px;
+    }
+  
+    .card-title {
+      font-size: 1.1rem;
+      margin-left: 5px;
+    }
+  
+    .track-item {
+      padding: 8px;
+      gap: 10px;
+    }
+  
+    .small-album-cover {
+      width: 45px;
+      height: 45px;
+    }
+  
+    .track-name {
+      font-size: 13px;
+    }
+  
+    .artist-name {
+      font-size: 11px;
+    }
+  
+    .top-track-image {
+      width: 90px;
+      height: 90px;
+    }
+  
+    .top-track-info {
+      padding: 8px 15px;
+      min-height: 50px;
+    }
+  
+    .top-track-info h4 {
+      font-size: 13px;
+    }
+  
+    .top-track-info p {
+      font-size: 11px;
+    }
+  }
+  
+  /* Very Small Mobile Styles (max-width: 360px) */
+  @media (max-width: 360px) {
+    .dashboard-display {
+      padding: 15px 8px;
+    }
+  
+    .dashboard-card {
+      padding: 15px 10px;
+    }
+  
+    #current-track-cover img {
+      height: 90px;
+      width: 90px;
+    }
+  
+    .album-cover {
+      width: 90px;
+      height: 90px;
+    }
+  
+    .scrollable-card {
+      min-height: 250px;
+      max-height: 350px;
+    }
+  
+    .track-item {
+      padding: 6px;
+      gap: 8px;
+    }
+  
+    .small-album-cover {
+      width: 40px;
+      height: 40px;
+    }
+  
+    .top-track-image {
+      width: 80px;
+      height: 80px;
+    }
+  }
+  
+  /* Animation */
+  .content-fade {
+    animation: fadeIn 0.3s ease-in-out;
+  }
+  
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+      transform: translateY(10px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }

@@ -1,21 +1,16 @@
-<!-- <p>navbar works!</p> -->
-  <div id="ProfielSection" (mouseenter)="showDropdown()" (mouseleave)="hideDropdown()">
-    <div id="ProfileImage">
-      <img *ngIf="profile.images?.length" [src]="profile.images[0].url" />
-    </div>
-    <div id="ProfileInfo">
-      <p id="Name">{{ profile.display_name }}</p>
-      <p id="Country">{{ profile.country }}</p>
-    </div>
-  </div>
+<nav id="Navbar" (mouseenter)="showDropdown()" (mouseleave)="hideDropdown()">
+  <button id="ProfileSection" aria-haspopup="true" [attr.aria-expanded]="isDropdownVisible" (click)="toggleDropdown($event)" (keydown)="onProfileKeydown($event)">
+    <span id="ProfileImage" aria-hidden="true">
+      <img *ngIf="profile.images?.length" [src]="profile.images[0].url" alt="" />
+    </span>
+    <span id="ProfileInfo">
+      <span id="Name">{{ profile.display_name || 'Profile' }}</span>
+    </span>
+  </button>
 
-  <div id="DropdownMenu" class="dropdown-container" [class.visible]="isDropdownVisible">
-    <button class="dropdown-item" (click)="onMenuItemClick('Top Songs')">Top Songs</button>
-    <button class="dropdown-item" (click)="onMenuItemClick('Top Artists')">Top Artists</button>
-    <button class="dropdown-item" (click)="onMenuItemClick('Listening History')">Listening History</button>
-    <button class="dropdown-item" (click)="onMenuItemClick('Global')">Global</button>
-    <button class="dropdown-item" (click)="onMenuItemClick('Dashboard')">Dashboard</button>
-    <hr class="dropdown-divider">
-    <button class="dropdown-item logout" (click)="onMenuItemClick('Logout')">Logout</button>
+  <div id="DropdownMenu" class="dropdown-container" [class.visible]="isDropdownVisible" role="menu">
+    <a class="dropdown-item" routerLink="/dashboard" role="menuitem" (click)="hideDropdown()">Dashboard</a>
+    <a class="dropdown-item" routerLink="/artists" role="menuitem" (click)="hideDropdown()">Artists</a>
+    <a class="dropdown-item" routerLink="/recents" role="menuitem" (click)="hideDropdown()">Recents</a>
   </div>
-
+</nav>

@@ -8,6 +8,13 @@ export class SpotifyService {
   private redirectUri = 'http://127.0.0.1:5173/callback';
   private accessToken: string = '';
 
+  constructor() {
+    const stored = localStorage.getItem('access_token');
+    if (stored) {
+      this.accessToken = stored;
+    }
+  }
+
   getClientId(): string {
     return this.clientId;
   }
@@ -30,6 +37,9 @@ export class SpotifyService {
     });
 
     const { access_token } = await result.json();
+    if (access_token) {
+      this.setAccessToken(access_token);
+    }
     return access_token;
   }
 
@@ -51,8 +61,19 @@ export class SpotifyService {
   }
 
   setAccessToken(token: string) {
-  this.accessToken = token;
-}
+    this.accessToken = token;
+    try {
+      localStorage.setItem('access_token', token);
+    } catch {}
+  }
+
+  getStoredAccessToken(): string | null {
+    return this.accessToken || localStorage.getItem('access_token');
+  }
+
+  isAuthenticated(): boolean {
+    return Boolean(this.getStoredAccessToken());
+  }
 
 async fetchRecentlyPlayed(token?: string): Promise<any[]> {
   const useToken = token || this.accessToken;

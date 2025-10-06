@@ -8,6 +8,10 @@ import { Callback } from './Components/callback/callback';
 import { Homepage } from './Components/homepage/homepage';
 // import { Testing } from './Components/testing/testing';
 import { Navbar } from './Components/navbar/navbar';
+import { Artists } from './Components/artists/artists';
+import { Dashboard } from './Components/dashboard/dashboard';
+import { Recents } from './Components/recents/recents';
+import { Share } from './Components/share/share';
 
 @NgModule({
    declarations: [
@@ -17,6 +21,10 @@ import { Navbar } from './Components/navbar/navbar';
     Homepage,
     // Testing,
     Navbar,
+    Artists,
+    Dashboard,
+    Recents,
+    Share,
   ],
   imports: [
     BrowserModule,

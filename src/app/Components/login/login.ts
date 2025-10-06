@@ -100,7 +100,7 @@ import { SpotifyService } from '../../Services/spotify-service';
   selector: 'app-login',
   standalone: false,
   templateUrl: './login.html',
-  styleUrl: './login.css'
+  styleUrls: ['./login.css']
 })
 export class Login implements OnInit {
   profile: any = null;

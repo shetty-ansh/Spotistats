@@ -1,4 +1,9 @@
-/* You can add global styles to this file, and also import other style files */
-/* * {
-  font-family: 'Dongle', sans-serif;
-} */
+/* Global light reset and density tweaks */
+*, *::before, *::after { box-sizing: border-box; }
+html, body { margin: 0; padding: 0; }
+img { display: block; max-width: 100%; }
+h1, h2, h3, h4, h5, h6, p { margin: 0; }
+
+:root {
+  --navbar-height: 56px;
+}

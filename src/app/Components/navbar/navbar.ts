@@ -20,6 +20,14 @@ export class Navbar implements OnInit {
     const hash = window.location.hash;
     const token = new URLSearchParams(hash.substring(1)).get('access_token');
 
+    // Use stored token first (handles refresh/other routes)
+    const stored = this.spotifyService.getStoredAccessToken();
+    if (stored && !token && !code) {
+      this.token = stored;
+      this.profile = await this.spotifyService.fetchProfile(stored);
+      return;
+    }
+
     if (code) {
       const accessToken = await this.spotifyService.getAccessToken(code);
       this.token = accessToken;
@@ -32,9 +40,17 @@ export class Navbar implements OnInit {
       }
 
       if (token) {
-        localStorage.setItem('access_token', token);
         this.spotifyService.setAccessToken(token);
         this.token = token;
+      }
+
+      // Clean the URL once we have the token
+      window.history.replaceState({}, document.title, window.location.pathname);
+    } else {
+      const fallback = this.spotifyService.getStoredAccessToken();
+      if (fallback) {
+        this.token = fallback;
+        this.profile = await this.spotifyService.fetchProfile(fallback);
       }
     }
   }
@@ -48,7 +64,17 @@ export class Navbar implements OnInit {
     this.isDropdownVisible = false;
   }
 
-  onMenuItemClick(item: string) {
-    console.log(`Clicked: ${item}`);
+  toggleDropdown(event: Event) {
+    event.preventDefault();
+    this.isDropdownVisible = !this.isDropdownVisible;
+  }
+
+  onProfileKeydown(event: KeyboardEvent) {
+    if (event.key === 'Enter' || event.key === ' ') {
+      event.preventDefault();
+      this.isDropdownVisible = !this.isDropdownVisible;
+    } else if (event.key === 'Escape') {
+      this.hideDropdown();
+    }
   }
 }
