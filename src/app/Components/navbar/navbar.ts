@@ -77,4 +77,9 @@ export class Navbar implements OnInit {
       this.hideDropdown();
     }
   }
+
+  logout(){
+    this.isDropdownVisible = false;
+    this.token = this.spotifyService.clearAccessToken()
+  }
 }

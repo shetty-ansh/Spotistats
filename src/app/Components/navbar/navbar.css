@@ -63,8 +63,9 @@
   top: 56px; /* directly under navbar */
   left: 8px;
   min-width: 180px;
-  background: #fff;
-  border: 1px solid #e9ecef;
+  background: #1f1f1f;
+  color: white;
+  /* border: 1px solid #e9ecef; */
   border-radius: 8px;
   box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
   z-index: 1001;
@@ -84,12 +85,29 @@
 .dropdown-item {
   display: block;
   padding: 10px 14px;
-  color: #111;
+  color: white;
   text-decoration: none;
   font-size: 14px;
+  /* text-align: center; */
 }
 
 .dropdown-item:hover,
 .dropdown-item:focus {
   background-color: #f2f4f7;
+}
+
+#logout-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+#logout-button button{
+  margin: 2px;
+  padding: 10px 20px;
+  background-color: red;
+  color: white;
+  border: none;
+  border-radius: 20px;
+  font-weight: bolder;
 }

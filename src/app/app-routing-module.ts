@@ -8,7 +8,7 @@ import { Artists } from './Components/artists/artists';
 import { Recents } from './Components/recents/recents';
 import { Dashboard } from './Components/dashboard/dashboard';
 import { Navbar } from './Components/navbar/navbar';
-// import { Testing } from './Components/testing/testing';
+import { Tracks } from './Components/tracks/tracks';
 
 const routes: Routes = [
   { path: 'login', component: Login },
@@ -17,6 +17,7 @@ const routes: Routes = [
   { path: 'dashboard', component: Dashboard },
   { path: 'artists', component: Artists },
   { path: 'recents', component: Recents },
+  { path: 'tracks', component: Tracks },
   { path: '', redirectTo: '/homepage', pathMatch: 'full' }
 ];
 

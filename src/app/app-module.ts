@@ -12,6 +12,7 @@ import { Artists } from './Components/artists/artists';
 import { Dashboard } from './Components/dashboard/dashboard';
 import { Recents } from './Components/recents/recents';
 import { Share } from './Components/share/share';
+import { Tracks } from './Components/tracks/tracks';
 
 @NgModule({
    declarations: [
@@ -25,6 +26,7 @@ import { Share } from './Components/share/share';
     Dashboard,
     Recents,
     Share,
+    Tracks,
   ],
   imports: [
     BrowserModule,

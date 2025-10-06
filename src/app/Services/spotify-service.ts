@@ -71,6 +71,10 @@ export class SpotifyService {
     return this.accessToken || localStorage.getItem('access_token');
   }
 
+  clearAccessToken(): string | null {
+    return '';
+  }
+
   isAuthenticated(): boolean {
     return Boolean(this.getStoredAccessToken());
   }
