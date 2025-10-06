@@ -12,9 +12,9 @@
     inset: 0;
     z-index: 0;
     background-image:
-          radial-gradient(circle at 50% 100%, rgba(255, 115, 0, 0.6) 0%, transparent 60%),
-          radial-gradient(circle at 50% 100%, rgba(255, 140, 0, 0.4) 0%, transparent 70%),
-          radial-gradient(circle at 50% 100%, rgba(255, 215, 0, 0.3) 0%, transparent 80%)
+    radial-gradient(circle at 50% 100%, rgba(58, 175, 169, 0.6) 0%, transparent 60%),
+    radial-gradient(circle at 50% 100%, rgba(255, 140, 0, 0.4) 0%, transparent 70%),
+    radial-gradient(circle at 50% 100%, rgba(238, 130, 238, 0.3) 0%, transparent 80%)
   }
   
   

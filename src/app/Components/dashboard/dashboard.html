@@ -1,1 +1,134 @@
-<p>dashboard works!</p>
+<div class="MainContainer">
+  <div class="page-title">
+    <h1>Your Music Dashboard</h1>
+    <p>Your listening journey at a glance</p>
+  </div>
+
+  <div class="dashboard-content" *ngIf="!loading && !error; else loadingOrError">
+    
+    <div class="left-section">
+      <div class="profile-card" *ngIf="profile">
+        <div class="avatar">
+          <img *ngIf="profile.images?.length" [src]="profile.images[0].url" [alt]="profile.display_name" />
+        </div>
+        <div class="profile-info">
+          <h2>{{ profile.display_name || 'User' }}</h2>
+          <p class="followers">{{ profile.followers?.total || 0 }} followers</p>
+        </div>
+      </div>
+
+        <div class="metric-card">
+          <div class="metric-value">{{ (totalRecentMs / 3600000) | number:'1.0-1' }} Hours</div>
+          <div class="metric-label">Listening Time</div>
+        </div>
+        <div class="metric-card">
+          <div class="metric-value">{{ distinctRecentArtists }}</div>
+          <div class="metric-label">Unique Artists</div>
+        </div>
+        <div class="metric-card">
+          <div class="metric-value">{{ averageTrackPopularity / 10}}</div>
+          <div class="metric-label">Avg Popularity</div>
+        </div>
+    </div>
+    <div class="right-section">
+      <div class="card recents-card">
+        <div class="card-header">
+          <h3>Listening Activity</h3>
+        </div>
+        <div class="listening-activity">
+          <div class="activity-left">
+            <div class="now-playing-section" *ngIf="currentlyPlaying && currentlyPlaying.item; else lastPlayed">
+              <h4>Now Playing</h4>
+              <div class="now-playing-card">
+                <img [src]="currentlyPlaying.item?.album?.images?.[0]?.url" [alt]="currentlyPlaying.item?.name" />
+                <div class="np-info">
+                  <p class="np-title">{{ currentlyPlaying.item?.name }}</p>
+                  <p class="np-artist">{{ currentlyPlaying.item?.artists?.[0]?.name }}</p>
+                </div>
+              </div>
+            </div>
+            <ng-template #lastPlayed>
+              <h4>Last Played</h4>
+              <div class="now-playing-card" *ngIf="recentTracks && recentTracks.length">
+                <img [src]="recentTracks[0]?.track?.album?.images?.[0]?.url" [alt]="recentTracks[0]?.track?.name" />
+                <div class="np-info">
+                  <p class="np-title">{{ recentTracks[0]?.track?.name }}</p>
+                  <p class="np-artist">{{ recentTracks[0]?.track?.artists?.[0]?.name }}</p>
+                </div>
+              </div>
+              <div class="np-info" *ngIf="!recentTracks || !recentTracks.length">
+                <p>No recent plays</p>
+              </div>
+            </ng-template>
+          </div>
+          <div class="activity-right">
+            <div class="chart-wrapper fixed-chart" id="recent-graph">
+              <canvas id="recentsChart"></canvas>
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+
+
+
+
+
+      <div class="card">
+        <div class="card-header">
+          <h3>Top Genres</h3>
+        </div>
+        <div class="top-genres-grid">
+          <div class="chart-wrapper fixed-chart" id="recent-graph">
+            <canvas id="genresChart"></canvas>
+          </div>
+          <div class="genre-list">
+            <div class="genre-item" *ngFor="let g of topGenreCounts | slice:0:5; let i = index">
+              <div class="genre-rank" [class.rank-1]="i===0" [class.rank-2]="i===1" [class.rank-3]="i===2" [class.rank-4]="i===3" [class.rank-5]="i===4">#{{ i + 1 }}</div>
+              <div class="genre-meta">
+                <div class="genre-name">{{ g.label }}</div>
+                <div class="genre-count">{{ g.count }} artists</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="center-section">
+      <div class="card">
+        <div class="card-header">
+          <h3>Top Tracks</h3>
+          <div class="switch-container" [class.switched]="isTracksToggled" (click)="toggleTracksRange()">
+            <div class="switch-slider"></div>
+            <div class="switch-options">
+              <div class="switch-option" [class.active]="!isTracksToggled">Last Month</div>
+              <div class="switch-option" [class.active]="isTracksToggled">6 Months</div>
+            </div>
+          </div>
+        </div>
+        <div class="tracks-split">
+          <div class="tracks-list-scroll">
+            <div class="track-item" *ngFor="let track of tracksList() | slice:0:10; let i = index">
+              <div class="rank">{{ i + 1 }}</div>
+              <img [src]="track.album?.images?.[0]?.url" [alt]="track.name" />
+              <div class="track-meta">
+                <p class="track-name">{{ track.name }}</p>
+                <p class="track-artist">{{ track.artists?.[0]?.name }}</p>
+              </div>
+            </div>
+          </div>
+          <div class="chart-wrapper fixed-chart">
+            <canvas id="tracksChart"></canvas>
+          </div>
+        </div>
+      
+      </div>
+    </div>
+  </div>
+
+  <ng-template #loadingOrError>
+    <div class="state" *ngIf="loading">Loading your dashboard...</div>
+    <div class="state error" *ngIf="!loading && error">{{ error }}</div>
+  </ng-template>
+</div>

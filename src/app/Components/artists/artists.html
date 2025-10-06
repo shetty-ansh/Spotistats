@@ -1,32 +1,35 @@
 <div class="MainContainer">
-<div class="carousel-display" *ngIf="topArtistsShort.length && topArtists">
+  <div class="page-title">
+    <h1>Your Top Artists</h1>
+    <p>Discover who you've been listening to most</p>
+  </div>
+
+  <div class="carousel-display" *ngIf="topArtistsShort.length && topArtistsMedium.length">
     <div id="ToggleContainer">
       <div class="switch-container" [class.switched]="isArtistsToggled" (click)="toggleArtistSwitch()">
         <div class="switch-slider"></div>
         <div class="switch-options">
           <div class="switch-option" [class.active]="!isArtistsToggled">Last Month</div>
           <div class="switch-option" [class.active]="isArtistsToggled">6 Months</div>
-
         </div>
       </div>
     </div>
+
     <div id="carousel-container">
       <button class="nav-button left" (click)="prevSlide()">‹</button>
       <div class="carousel-track">
         <div class="carousel-card" *ngFor="let artist of visibleArtists(); let i = index" [ngClass]="getCardClass(i)">
           <div id="Image">
-            <img [src]="artist.images[0]?.url" alt="Artist Image" />
-            <div class="track-badge">{{ i }}</div>
+            <img [src]="artist.images[0]?.url" [alt]="artist.name" />
+            <div class="track-badge">{{ currentIndex + i - 1 }}</div>
           </div>
           <div class="track-info">
             <p id="TrackName">{{ artist.name }}</p>
-            <p id="ArtistName">{{ artist.genres?.[0] ? toTitleCase(artist.genres[0]) : artist.genres[0] }}</p>
-            <!-- <p id="ArtistName">{{ artist.genres[0] }}</p> -->
+            <p id="ArtistName">{{ artist.genres?.[0] ? toTitleCase(artist.genres[0]) : 'Artist' }}</p>
           </div>
         </div>
       </div>
       <button class="nav-button right" (click)="nextSlide()">›</button>
     </div>
-
   </div>
 </div>
