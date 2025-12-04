@@ -9,6 +9,8 @@ import { Recents } from './Components/recents/recents';
 import { Dashboard } from './Components/dashboard/dashboard';
 import { Navbar } from './Components/navbar/navbar';
 import { Tracks } from './Components/tracks/tracks';
+import { DemoPageComponent } from './Components/morphing-card-stack/demo-page';
+import { DnaComponent } from './Components/dna/dna';
 
 const routes: Routes = [
   { path: 'login', component: Login },
@@ -18,6 +20,8 @@ const routes: Routes = [
   { path: 'artists', component: Artists },
   { path: 'recents', component: Recents },
   { path: 'tracks', component: Tracks },
+  { path: 'demo', component: DemoPageComponent },
+  { path: 'dna', component: DnaComponent },
   { path: '', redirectTo: '/homepage', pathMatch: 'full' }
 ];
 

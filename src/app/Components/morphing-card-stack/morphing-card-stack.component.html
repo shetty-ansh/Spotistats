@@ -1,0 +1,46 @@
+<div class="morphing-card-stack-container">
+  <!-- Layout Toggle -->
+  <div class="layout-toggle">
+    <button *ngFor="let mode of layoutModes" (click)="setLayout(mode)" [class.active]="layout === mode"
+      class="layout-button" [attr.aria-label]="'Switch to ' + mode + ' layout'">
+      <i [attr.data-lucide]="getLayoutIcon(mode)" class="icon"></i>
+    </button>
+  </div>
+
+  <!-- Cards Container -->
+  <div [ngClass]="getContainerClass()">
+    <div *ngFor="let card of getStackOrder(); trackBy: trackByCardId" [@cardAnimation]
+      [@expandAnimation]="isExpanded(card.id) ? 'expanded' : 'collapsed'" class="card" [ngClass]="{
+        'card-stack': layout === 'stack',
+        'card-grid': layout === 'grid',
+        'card-list': layout === 'list',
+        'card-top': isTopCard(card.stackPosition),
+        'card-expanded': isExpanded(card.id),
+        'card-dragging': isDragging && isTopCard(card.stackPosition)
+      }" [ngStyle]="getCardStyleWithDrag(card)" (click)="onCardClick(card)" (mousedown)="onDragStart($event, card)"
+      (mousemove)="onDragMove($event)" (mouseup)="onDragEnd($event)" (mouseleave)="onDragEnd($event)"
+      (touchstart)="onDragStart($event, card)" (touchmove)="onDragMove($event)" (touchend)="onDragEnd($event)">
+      <div class="card-content">
+        <div *ngIf="card.icon" class="card-icon">
+          <i [attr.data-lucide]="card.icon" class="icon"></i>
+        </div>
+        <div class="card-text">
+          <h3 class="card-title">{{ card.title }}</h3>
+          <p class="card-description" [ngClass]="getDescriptionClass()">
+            {{ card.description }}
+          </p>
+        </div>
+      </div>
+
+      <div *ngIf="isTopCard(card.stackPosition)" class="swipe-hint">
+        <span>Swipe to navigate</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Pagination Dots (only in stack mode) -->
+  <div *ngIf="layout === 'stack' && cards.length > 1" class="pagination-dots">
+    <button *ngFor="let card of cards; let i = index" (click)="goToCard(i)" [class.active]="i === activeIndex"
+      class="dot" [attr.aria-label]="'Go to card ' + (i + 1)"></button>
+  </div>
+</div>

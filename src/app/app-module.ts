@@ -1,5 +1,7 @@
 import { NgModule, provideBrowserGlobalErrorListeners } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { CommonModule } from '@angular/common';
 
 import { AppRoutingModule } from './app-routing-module';
 import { App } from './app';
@@ -10,12 +12,15 @@ import { Homepage } from './Components/homepage/homepage';
 import { Navbar } from './Components/navbar/navbar';
 import { Artists } from './Components/artists/artists';
 import { Dashboard } from './Components/dashboard/dashboard';
-import { Recents } from './Components/recents/recents';
 import { Share } from './Components/share/share';
 import { Tracks } from './Components/tracks/tracks';
+import { MorphingCardDemoComponent } from './Components/morphing-card-stack/demo.component';
+import { MorphingCardStackComponent } from './Components/morphing-card-stack/morphing-card-stack.component';
+import { DemoPageComponent } from './Components/morphing-card-stack/demo-page';
+import { DnaComponent } from './Components/dna/dna';
 
 @NgModule({
-   declarations: [
+  declarations: [
     App,
     Login,
     Callback,
@@ -24,12 +29,17 @@ import { Tracks } from './Components/tracks/tracks';
     Navbar,
     Artists,
     Dashboard,
-    Recents,
     Share,
     Tracks,
+    MorphingCardDemoComponent,
+    MorphingCardStackComponent,
+    DemoPageComponent,
+    DnaComponent,
   ],
   imports: [
     BrowserModule,
+    CommonModule, // Explicitly includes DatePipe and common directives
+    BrowserAnimationsModule,
     AppRoutingModule
   ],
   providers: [

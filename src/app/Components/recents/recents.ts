@@ -1,11 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { SpotifyService } from '../../Services/spotify-service';
 import { AfterViewInit, ElementRef, QueryList, ViewChildren } from '@angular/core';
+import { DatePipe, CommonModule } from '@angular/common';
 
 
 @Component({
   selector: 'app-recents',
-  standalone: false,
+  standalone: true,
+  imports: [CommonModule, DatePipe],
   templateUrl: './recents.html',
   styleUrls: ['./recents.css']
 })
@@ -64,7 +66,7 @@ export class Recents implements OnInit {
     if (code) {
       const accessToken = await this.spotifyService.getAccessToken(code);
       this.token = accessToken;
-      
+
       this.profile = await this.spotifyService.fetchProfile(accessToken);
       this.topTracksShort = await this.spotifyService.fetchTop(accessToken, 'tracks', 'short_term');
       this.topTracksMedium = await this.spotifyService.fetchTop(accessToken, 'tracks', 'medium_term');
@@ -74,7 +76,7 @@ export class Recents implements OnInit {
       this.currentSongData = await this.spotifyService.fetchCurrentlyPlaying(this.token);
       this.topByFreq = this.getTopTrackByFrequency();
 
-       if (!accessToken) {
+      if (!accessToken) {
         console.error("Failed to get access token. Check token exchange process.");
         // Fallback: try stored token if present
         const fallback = this.spotifyService.getStoredAccessToken();
@@ -165,7 +167,7 @@ export class Recents implements OnInit {
     return result;
   }
 
-    toggleArtistSwitch() {
+  toggleArtistSwitch() {
     this.isArtistsToggled = !this.isArtistsToggled;
     this.currentIndex = 0;
   }
@@ -183,7 +185,7 @@ export class Recents implements OnInit {
     return result;
   }
 
-    getTopTrackByFrequency() {
+  getTopTrackByFrequency() {
     if (!this.recentTracks.length) return null;
 
     const counts: {
@@ -241,8 +243,8 @@ export class Recents implements OnInit {
   }
 
   toTitleCase(str: string): string {
-  return str.replace(/\b\w/g, char => char.toUpperCase());
-}
+    return str.replace(/\b\w/g, char => char.toUpperCase());
+  }
 
 
   popularityScale100to10(popularity: number): number {
